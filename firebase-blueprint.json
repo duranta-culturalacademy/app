@@ -1,0 +1,120 @@
+{
+  "entities": {
+    "Registration": {
+      "title": "Registration",
+      "description": "Student registration for courses",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name of the student" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "email": { "type": "string", "format": "email", "description": "Email address" },
+        "course": { "type": "string", "description": "Selected course" },
+        "address": { "type": "string", "description": "Residential address" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected", "contacted"], "description": "Admission status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Registration timestamp" }
+      },
+      "required": ["name", "phone", "course"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Enrolled student record",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "course": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] },
+        "enrolledAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "phone", "course"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Course details",
+      "type": "object",
+      "properties": {
+        "titleBn": { "type": "string" },
+        "titleEn": { "type": "string" },
+        "descriptionBn": { "type": "string" },
+        "descriptionEn": { "type": "string" },
+        "duration": { "type": "string" },
+        "fee": { "type": "string" },
+        "instructor": { "type": "string" }
+      },
+      "required": ["titleEn", "instructor"]
+    },
+    "GalleryItem": {
+      "title": "Gallery Item",
+      "description": "Media item in gallery",
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" },
+        "type": { "type": "string", "enum": ["image", "video"] },
+        "category": { "type": "string", "enum": ["Music", "Acting", "Events"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["url", "type"]
+    },
+    "Notice": {
+      "title": "Notice",
+      "description": "Announcement or notice",
+      "type": "object",
+      "properties": {
+        "titleBn": { "type": "string" },
+        "titleEn": { "type": "string" },
+        "contentBn": { "type": "string" },
+        "contentEn": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["titleEn", "date"]
+    },
+    "Instructor": {
+      "title": "Instructor",
+      "description": "Academy instructor",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "bio": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["name", "role"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Contact form message",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "subject": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "content"]
+    },
+    "AdminProfile": {
+      "title": "Admin Profile",
+      "description": "Admin user profile and role",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["super_admin", "staff_admin"] }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "registrations": { "schema": "Registration", "description": "Admission registrations" },
+    "students": { "schema": "Student", "description": "Enrolled students" },
+    "courses": { "schema": "Course", "description": "Academy courses" },
+    "gallery": { "schema": "GalleryItem", "description": "Gallery media" },
+    "notices": { "schema": "Notice", "description": "Academy notices" },
+    "instructors": { "schema": "Instructor", "description": "Academy instructors" },
+    "messages": { "schema": "Message", "description": "Contact messages" },
+    "admins": { "schema": "AdminProfile", "description": "Admin users" }
+  }
+}

@@ -1,0 +1,75 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getAdminData() {
+      return get(/databases/$(database)/documents/admins/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+        (exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+         request.auth.token.email == "naimh6657@gmail.com");
+    }
+
+    function isSuperAdmin() {
+      return isAdmin() && (getAdminData().role == 'super_admin' || request.auth.token.email == "naimh6657@gmail.com");
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidNotice(notice) {
+      return notice.titleEn is string && notice.titleEn.size() <= 200 &&
+             notice.contentEn is string && notice.contentEn.size() <= 5000 &&
+             notice.date is string && notice.date.matches('^\\d{4}-\\d{2}-\\d{2}$');
+    }
+
+    // Collections
+    match /registrations/{regId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /students/{studentId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /courses/{courseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /gallery/{itemId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /notices/{noticeId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidNotice(request.resource.data);
+      allow update: if isAdmin() && isValidNotice(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    match /instructors/{instructorId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /messages/{messageId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /admins/{adminId} {
+      allow read: if isAuthenticated() && (request.auth.uid == adminId || isAdmin());
+      allow write: if isSuperAdmin();
+    }
+  }
+}

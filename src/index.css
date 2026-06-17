@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Fredoka", "Hind Siliguri", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fredoka", serif;
+  
+  --color-primary: #0047AB; /* Brighter Blue */
+  --color-secondary: #FF4D00; /* Deep Orange (Logo Vibe) */
+  --color-accent: #FFFDF9; /* Soft Cream */
+  --color-krishnachura: #FF3B3F; /* Playful Red */
+  --color-marigold: #FF8C00; /* Richer Orange */
+  --color-paddy: #32CD32; /* Playful Green */
+  --color-sky: #00CCFF; /* Playful Blue */
+  --color-saffron: #FF9933; /* Saffron */
+  --color-terracotta: #E2725B; /* Lighter Terracotta */
+  --color-forest: #228B22; /* Forest Green */
+
+  --animate-spin-slow: spin 8s linear infinite;
+}
+
+@layer base {
+  :root {
+    --bg-main: #FFFDF9;
+    --text-main: #0047AB;
+    --card-bg: #FFFFFF;
+    --text-heading: #0047AB;
+    --text-body: rgba(0, 71, 169, 0.8);
+    --text-muted: rgba(0, 71, 169, 0.6);
+    --input-placeholder: rgba(0, 71, 169, 0.2);
+  }
+
+  .dark {
+    --bg-main: #0B1120;
+    --text-main: #F1F5F9;
+    --card-bg: #1E293B;
+    --color-primary: #1E293B;
+    --color-accent: #0B1120;
+    --text-heading: #f3f4f6;
+    --text-body: #e5e7eb;
+    --text-muted: #d1d5db;
+    --input-placeholder: rgba(255, 255, 255, 0.3);
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    @apply font-sans transition-colors duration-300;
+  }
+  h1, h2, h3 {
+    @apply font-sans font-bold;
+  }
+  .text-heading {
+    color: var(--text-heading);
+    transition: color 0.3s ease;
+  }
+  .text-body {
+    color: var(--text-body);
+    transition: color 0.3s ease;
+  }
+  .text-muted {
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+  }
+  .input-text {
+    color: var(--text-heading);
+    transition: color 0.3s ease;
+  }
+  .input-label {
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+  }
+}
+
+/* Mobile Header Fix */
+@media (max-width: 767px) {
+  .org-name-bn {
+    font-size: 14px !important;
+    white-space: nowrap;
+  }
+  .org-name-en {
+    font-size: 14px !important;
+    white-space: normal !important;
+    max-width: 140px;
+  }
+  .org-subtitle {
+    font-size: 10px !important;
+    white-space: nowrap;
+  }
+}
+
+.alpana-pattern {
+  background-image: radial-gradient(circle, var(--color-secondary) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.8;
+}
+
+.musical-vibe {
+  background-color: var(--color-accent);
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c-1.1 0-2 .9-2 2v28.2c-1.2-.7-2.6-1.2-4-1.2-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8V15h10v-2H32V7c0-1.1-.9-2-2-2zm-6 41c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z' fill='%230047AB' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.rhythmic-pulse {
+  animation: rhythmic-pulse 2s infinite ease-in-out;
+}
+
+@keyframes rhythmic-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.cultural-header-pattern {
+  background-color: var(--color-primary);
+  background-image: 
+    radial-gradient(circle at 100% 150%, var(--color-secondary) 24%, var(--color-primary) 25%),
+    radial-gradient(circle at 0% 150%, var(--color-secondary) 24%, var(--color-primary) 25%),
+    radial-gradient(circle at 50% 100%, var(--color-secondary) 10%, var(--color-primary) 11%);
+  background-size: 40px 20px;
+}
+
+.vibrant-gradient {
+  background: linear-gradient(135deg, var(--color-krishnachura) 0%, var(--color-marigold) 100%);
+}
+
+.cool-gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-sky) 100%);
+}
+
+.nature-gradient {
+  background: linear-gradient(135deg, var(--color-forest) 0%, var(--color-paddy) 100%);
+}
+
+.text-gradient-vibrant {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-krishnachura via-marigold to-secondary;
+}
+
+.glass-card {
+  @apply bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl;
+}
+
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
