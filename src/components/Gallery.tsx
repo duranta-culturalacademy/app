@@ -169,19 +169,13 @@ interface GalleryItemProps {
 }
 
 const GalleryItem: React.FC<GalleryItemProps> = ({ img, index, onSelect }) => {
-  const getProxyUrl = (src: string) => {
-    if (src.startsWith('http')) {
-      return `/api/proxy-image?url=${encodeURIComponent(src)}`;
-    }
-    return src;
-  };
-
-  const [currentSrc, setCurrentSrc] = React.useState(getProxyUrl(img.src));
+  // প্রক্সি ফাংশনটি বাদ দিয়ে সরাসরি আসল ইমেজ লিংক ব্যবহার করা হয়েছে
+  const [currentSrc, setCurrentSrc] = React.useState(img.src);
   const [hasError, setHasError] = React.useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
 
   React.useEffect(() => {
-    setCurrentSrc(getProxyUrl(img.src));
+    setCurrentSrc(img.src);
     setHasError(false);
     setIsLoaded(false);
   }, [img.src]);
