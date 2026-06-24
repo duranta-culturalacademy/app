@@ -18,7 +18,7 @@ export const Gallery: React.FC = () => {
     },
     {
       id: 2,
-      src: "/2.jpg",
+      src: "https://1024terabox.com/s/1omx6jtbril7pNKXYMtEGrA",
       fallback: "https://images.unsplash.com/photo-1503095391758-11200cf53674?auto=format&fit=crop&q=80&w=800",
       title: "Stage Perform 2018",
       description: "Natok 'Antanagar Express' Moment's",
@@ -26,7 +26,7 @@ export const Gallery: React.FC = () => {
     },
     {
       id: 3,
-      src: "/3.jpg",
+      src: "https://1024terabox.com/s/1WNirq9DveGZEhQQaOArOgg",
       fallback: "https://images.unsplash.com/photo-1460881680858-30d872d5b530?auto=format&fit=crop&q=80&w=800",
       title: "Natok 'Antanagar Express'",
       description: "Chief Guest 'Dilara Zaman' Moment's",
@@ -34,7 +34,7 @@ export const Gallery: React.FC = () => {
     },
     {
       id: 4,
-      src: "/4.jpg",
+      src: "https://1024terabox.com/s/1tFt2DK74-HOUgSyZ3V6TFA",
       fallback: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800",
       title: "Stage Perform 2019",
       description: "Natok 'Fera' Moment's",
@@ -42,7 +42,7 @@ export const Gallery: React.FC = () => {
     },
     {
       id: 5,
-      src: "/5.jpg",
+      src: "https://1024terabox.com/s/1Dbyei6-FE5drsc1-EHygJA",
       fallback: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800",
       title: "Natok 'Fera'",
       description: "Chief Guest 'Dilara Zaman' Moment's",
@@ -50,7 +50,7 @@ export const Gallery: React.FC = () => {
     },
     {
       id: 6,
-      src: "/6.jpg",
+      src: "https://1024terabox.com/s/1OQyAqyQgW9SMHZ2zeKzBgQ",
       fallback: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800",
       title: "Stage Perform 2022",
       description: "Natok 'Antanagar Express' Moment's",
@@ -58,7 +58,7 @@ export const Gallery: React.FC = () => {
     },
     {
       id: 7,
-      src: "/7.jpg",
+      src: "https://1024terabox.com/s/1soua5YcSSMYrAAO-eiGdhQ",
       fallback: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
       title: "Natok 'Antanagar Express'",
       description: "Chief Guest 'Justice Abdur Rauf' Moment's",
@@ -66,7 +66,7 @@ export const Gallery: React.FC = () => {
     },
     {
       id: 8,
-      src: "/8.jpg",
+      src: "https://1024terabox.com/s/1tQGcACo4Ta6m4FKxZKjM6g",
       fallback: "https://images.unsplash.com/photo-1460881680858-30d872d5b530?auto=format&fit=crop&q=80&w=800",
       title: "Stage Perform 2023",
       description: "Natok 'Megher Kole Rod' Moment's",
@@ -74,7 +74,7 @@ export const Gallery: React.FC = () => {
     },
     {
       id: 9,
-      src: "/9.jpg",
+      src: "https://1024terabox.com/s/1x5oAvIUsNS2ICEiIuXJJmQ",
       fallback: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=800",
       title: "Stage Perform 2023",
       description: "Natok 'Megher Kole Rod' Moment's",
@@ -82,7 +82,7 @@ export const Gallery: React.FC = () => {
     },
     {
       id: 10,
-      src: "/10.jpg",
+      src: "https://1024terabox.com/s/1-0fW0PAs6ApkSPNnREygaQ",
       fallback: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800",
       title: "Natok 'Megher Kole Rod'",
       description: "Chief Guest 'Advocate Bodruddoza' Moment's",
@@ -169,9 +169,22 @@ interface GalleryItemProps {
 }
 
 const GalleryItem: React.FC<GalleryItemProps> = ({ img, index, onSelect }) => {
-  const [currentSrc, setCurrentSrc] = React.useState(img.src);
+  const getProxyUrl = (src: string) => {
+    if (src.startsWith('http')) {
+      return `/api/proxy-image?url=${encodeURIComponent(src)}`;
+    }
+    return src;
+  };
+
+  const [currentSrc, setCurrentSrc] = React.useState(getProxyUrl(img.src));
   const [hasError, setHasError] = React.useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    setCurrentSrc(getProxyUrl(img.src));
+    setHasError(false);
+    setIsLoaded(false);
+  }, [img.src]);
 
   const handleImageError = () => {
     if (!hasError) {
