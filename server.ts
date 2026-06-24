@@ -6,7 +6,7 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // Dynamic image proxy endpoint for TeraBox links
+  // Dynamic image proxy endpoint for TeraBox and direct links
   app.get("/api/proxy-image", async (req, res) => {
     const url = req.query.url as string;
     if (!url) {
@@ -14,40 +14,54 @@ async function startServer() {
     }
 
     try {
-      const pageRes = await fetch(url);
-      const text = await pageRes.text();
+      if (url.includes("1024terabox.com") || url.includes("terabox")) {
+        const pageRes = await fetch(url);
+        const text = await pageRes.text();
 
-      const startKey = 'https://dm-data.';
-      const startIdx = text.indexOf(startKey);
-      if (startIdx !== -1) {
-        let endIdx = text.indexOf('"', startIdx);
-        const endIdxSingle = text.indexOf("'", startIdx);
-        if (endIdxSingle !== -1 && (endIdx === -1 || endIdxSingle < endIdx)) {
-          endIdx = endIdxSingle;
-        }
+        const startKey = 'https://dm-data.';
+        const startIdx = text.indexOf(startKey);
+        if (startIdx !== -1) {
+          let endIdx = text.indexOf('"', startIdx);
+          const endIdxSingle = text.indexOf("'", startIdx);
+          if (endIdxSingle !== -1 && (endIdx === -1 || endIdxSingle < endIdx)) {
+            endIdx = endIdxSingle;
+          }
 
-        if (endIdx !== -1) {
-          const rawUrl = text.substring(startIdx, endIdx);
-          const imgUrl = rawUrl.replace(/&amp;/g, '&');
+          if (endIdx !== -1) {
+            const rawUrl = text.substring(startIdx, endIdx);
+            const imgUrl = rawUrl.replace(/&amp;/g, '&');
 
-          const imgRes = await fetch(imgUrl, {
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
-              'Referer': 'https://1024terabox.com/'
+            const imgRes = await fetch(imgUrl, {
+              headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+                'Referer': 'https://1024terabox.com/'
+              }
+            });
+
+            if (imgRes.status === 200) {
+              res.setHeader('Content-Type', 'image/jpeg');
+              res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
+              const arrayBuffer = await imgRes.arrayBuffer();
+              return res.send(Buffer.from(arrayBuffer));
+            } else {
+              return res.status(imgRes.status).send(`Failed to fetch thumbnail: ${imgRes.status}`);
             }
-          });
-
-          if (imgRes.status === 200) {
-            res.setHeader('Content-Type', 'image/jpeg');
-            res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
-            const arrayBuffer = await imgRes.arrayBuffer();
-            return res.send(Buffer.from(arrayBuffer));
-          } else {
-            return res.status(imgRes.status).send(`Failed to fetch thumbnail: ${imgRes.status}`);
           }
         }
+        return res.status(404).send("Thumbnail URL not found in page");
+      } else {
+        // Direct link proxying
+        const imgRes = await fetch(url);
+        if (imgRes.status === 200) {
+          const contentType = imgRes.headers.get("content-type") || "image/jpeg";
+          res.setHeader('Content-Type', contentType);
+          res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
+          const arrayBuffer = await imgRes.arrayBuffer();
+          return res.send(Buffer.from(arrayBuffer));
+        } else {
+          return res.status(imgRes.status).send(`Failed to fetch direct image: ${imgRes.status}`);
+        }
       }
-      return res.status(404).send("Thumbnail URL not found in page");
     } catch (error: any) {
       console.error("Proxy error:", error);
       return res.status(500).send(`Server error: ${error.message}`);

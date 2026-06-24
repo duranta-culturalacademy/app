@@ -9,85 +9,85 @@ export const Gallery: React.FC = () => {
 
   const images = [
     {
-      id: 1,
-      src: "https://1024terabox.com/s/1oQ1bWinuxFwSJeocBpvDXQ",
-      fallback: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800",
-      title: "Stage Perform 2018",
-      description: "Natok 'Antanagar Express' Moment's",
-      size: ""
-    },
-    {
-      id: 2,
-      src: "https://1024terabox.com/s/1omx6jtbril7pNKXYMtEGrA",
-      fallback: "https://images.unsplash.com/photo-1503095391758-11200cf53674?auto=format&fit=crop&q=80&w=800",
-      title: "Stage Perform 2018",
-      description: "Natok 'Antanagar Express' Moment's",
-      size: ""
-    },
-    {
-      id: 3,
-      src: "https://1024terabox.com/s/1WNirq9DveGZEhQQaOArOgg",
-      fallback: "https://images.unsplash.com/photo-1460881680858-30d872d5b530?auto=format&fit=crop&q=80&w=800",
-      title: "Natok 'Antanagar Express'",
-      description: "Chief Guest 'Dilara Zaman' Moment's",
-      size: ""
-    },
-    {
-      id: 4,
-      src: "https://1024terabox.com/s/1tFt2DK74-HOUgSyZ3V6TFA",
-      fallback: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800",
-      title: "Stage Perform 2019",
-      description: "Natok 'Fera' Moment's",
-      size: ""
-    },
-    {
-      id: 5,
-      src: "https://1024terabox.com/s/1Dbyei6-FE5drsc1-EHygJA",
-      fallback: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800",
-      title: "Natok 'Fera'",
-      description: "Chief Guest 'Dilara Zaman' Moment's",
-      size: ""
-    },
-    {
-      id: 6,
-      src: "https://1024terabox.com/s/1OQyAqyQgW9SMHZ2zeKzBgQ",
-      fallback: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800",
-      title: "Stage Perform 2022",
-      description: "Natok 'Antanagar Express' Moment's",
-      size: ""
-    },
-    {
-      id: 7,
-      src: "https://1024terabox.com/s/1soua5YcSSMYrAAO-eiGdhQ",
-      fallback: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
-      title: "Natok 'Antanagar Express'",
-      description: "Chief Guest 'Justice Abdur Rauf' Moment's",
-      size: ""
-    },
-    {
-      id: 8,
-      src: "https://1024terabox.com/s/1tQGcACo4Ta6m4FKxZKjM6g",
-      fallback: "https://images.unsplash.com/photo-1460881680858-30d872d5b530?auto=format&fit=crop&q=80&w=800",
-      title: "Stage Perform 2023",
-      description: "Natok 'Megher Kole Rod' Moment's",
-      size: ""
-    },
-    {
-      id: 9,
-      src: "https://1024terabox.com/s/1x5oAvIUsNS2ICEiIuXJJmQ",
-      fallback: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=800",
-      title: "Stage Perform 2023",
-      description: "Natok 'Megher Kole Rod' Moment's",
-      size: ""
-    },
-    {
-      id: 10,
-      src: "https://1024terabox.com/s/1-0fW0PAs6ApkSPNnREygaQ",
-      fallback: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800",
-      title: "Natok 'Megher Kole Rod'",
-      description: "Chief Guest 'Advocate Bodruddoza' Moment's",
-      size: ""
-    }
+       id: 1,
+       src: "https://i.postimg.cc/GmRsRgCj/1.jpg",
+       fallback: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800",
+       title: "Stage Perform 2018",
+       description: "Natok 'Antanagar Express' Moment's",
+       size: ""
+     },
+     {
+       id: 2,
+       src: "https://i.postimg.cc/jSTJT3bX/2.jpg",
+       fallback: "https://images.unsplash.com/photo-1503095391758-11200cf53674?auto=format&fit=crop&q=80&w=800",
+       title: "Stage Perform 2018",
+       description: "Natok 'Antanagar Express' Moment's",
+       size: ""
+     },
+     {
+       id: 3,
+       src: "https://i.postimg.cc/JzQHz3rj/3.jpg",
+       fallback: "https://images.unsplash.com/photo-1460881680858-30d872d5b530?auto=format&fit=crop&q=80&w=800",
+       title: "Natok 'Antanagar Express'",
+       description: "Chief Guest 'Dilara Zaman' Moment's",
+       size: ""
+     },
+     {
+       id: 4,
+       src: "https://i.postimg.cc/mgVhsbj6/4.jpg",
+       fallback: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800",
+       title: "Stage Perform 2019",
+       description: "Natok 'Fera' Moment's",
+       size: ""
+     },
+     {
+       id: 5,
+       src: "https://i.postimg.cc/rwgzk8j7/5.jpg",
+       fallback: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800",
+       title: "Natok 'Fera'",
+       description: "Chief Guest 'Dilara Zaman' Moment's",
+       size: ""
+     },
+     {
+       id: 6,
+       src: "https://i.postimg.cc/nrvcwZM2/6.jpg",
+       fallback: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800",
+       title: "Stage Perform 2022",
+       description: "Natok 'Antanagar Express' Moment's",
+       size: ""
+     },
+     {
+       id: 7,
+       src: "https://i.postimg.cc/Fzjsnm1D/7.jpg",
+       fallback: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
+       title: "Natok 'Antanagar Express'",
+       description: "Chief Guest 'Justice Abdur Rauf' Moment's",
+       size: ""
+     },
+     {
+       id: 8,
+       src: "https://i.postimg.cc/dVQtnbF9/8.jpg",
+       fallback: "https://images.unsplash.com/photo-1460881680858-30d872d5b530?auto=format&fit=crop&q=80&w=800",
+       title: "Stage Perform 2023",
+       description: "Natok 'Megher Kole Rod' Moment's",
+       size: ""
+     },
+     {
+       id: 9,
+       src: "https://i.postimg.cc/T32YQzx0/9.jpg",
+       fallback: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=800",
+       title: "Stage Perform 2023",
+       description: "Natok 'Megher Kole Rod' Moment's",
+       size: ""
+     },
+     {
+       id: 10,
+       src: "https://i.postimg.cc/0y52ZTvZ/10.jpg",
+       fallback: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800",
+       title: "Natok 'Megher Kole Rod'",
+       description: "Chief Guest 'Advocate Bodruddoza' Moment's",
+       size: ""
+     }
   ];
 
   return (
