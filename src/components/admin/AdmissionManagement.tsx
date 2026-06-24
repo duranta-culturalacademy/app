@@ -86,7 +86,18 @@ export const AdmissionManagement: React.FC = () => {
                     idx % 2 === 0 ? "bg-white" : "bg-accent/30"
                   )}>
                     <TableCell className="p-8 text-lg font-black text-primary/40">
-                      {reg.createdAt?.toDate().toLocaleDateString()}
+                      {(() => {
+                        if (!reg.createdAt) return '';
+                        if (typeof reg.createdAt.toDate === 'function') {
+                          try {
+                            return reg.createdAt.toDate().toLocaleDateString();
+                          } catch (e) {
+                            console.warn("Error converting createdAt to Date:", e);
+                          }
+                        }
+                        const d = new Date(reg.createdAt);
+                        return !isNaN(d.getTime()) ? d.toLocaleDateString() : '';
+                      })()}
                     </TableCell>
                     <TableCell className="p-8">
                       <div className="flex flex-col">

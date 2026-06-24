@@ -47,7 +47,20 @@ export const MessageManagement: React.FC = () => {
                     <h3 className="text-2xl font-black text-primary">{msg.name}</h3>
                     <p className="text-sm font-black text-primary/40 uppercase tracking-widest">{msg.email}</p>
                   </div>
-                  <span className="text-sm font-black text-primary/20">{msg.createdAt?.toDate().toLocaleString()}</span>
+                  <span className="text-sm font-black text-primary/20">
+                    {(() => {
+                      if (!msg.createdAt) return '';
+                      if (typeof msg.createdAt.toDate === 'function') {
+                        try {
+                          return msg.createdAt.toDate().toLocaleString();
+                        } catch (e) {
+                          console.warn("Error converting createdAt to Date:", e);
+                        }
+                      }
+                      const d = new Date(msg.createdAt);
+                      return !isNaN(d.getTime()) ? d.toLocaleString() : '';
+                    })()}
+                  </span>
                 </div>
                 <div className="bg-accent/50 p-6 rounded-2xl border-2 border-primary/5">
                   <p className="text-lg font-black text-primary/80 leading-relaxed">{msg.content}</p>

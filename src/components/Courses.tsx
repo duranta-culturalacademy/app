@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from './ui/card';
+import { Card, CardContent, CardFooter } from './ui/card';
 import { Button } from './ui/button';
-import { Link } from 'react-router-dom';
-import { Music, Drama, Clock, CreditCard, CheckCircle2, Sparkles, ArrowRight, Music2, Mic2, Disc, Radio, BookOpen, X } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Clock, CreditCard, ArrowRight, Music2, Mic2, Disc, Drama, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
-import { db } from '../lib/firebase';
-import { handleFirestoreError, OperationType } from '../lib/firestore-errors';
+
 
 export const Courses: React.FC = () => {
   const { t, language } = useLanguage();
@@ -38,6 +36,12 @@ export const Courses: React.FC = () => {
 
   const [loading, setLoading] = useState(false); // No longer fetching from Firebase directly
   const [selectedCourse, setSelectedCourse] = useState<any | null>(null);
+  const [expandedStates, setExpandedStates] = useState<Record<string, boolean>>({});
+  const navigate = useNavigate();
+
+  const toggleExpanded = (courseId: string) => {
+    setExpandedStates(prev => ({ ...prev, [courseId]: !prev[courseId] }));
+  };
 
   // Remainder of component...
   return (
@@ -50,7 +54,7 @@ export const Courses: React.FC = () => {
         <div className="absolute -top-10 md:-top-20 left-1/2 -translate-x-1/2 opacity-10 pointer-events-none">
           <Disc size={100} className="md:w-[200px] md:h-[200px] animate-spin-slow" />
         </div>
-        <h1 className="text-4xl sm:text-6xl md:text-9xl font-black mb-6 md:mb-8 flex flex-wrap items-center justify-center gap-4 md:gap-6 px-4 text-heading">
+        <h1 className="text-4xl sm:text-6xl md:text-[110px] md:leading-[120px] font-black mb-6 md:mb-8 flex flex-wrap items-center justify-center gap-4 md:gap-6 px-4 text-heading">
           <Music2 className="text-krishnachura hidden sm:block" /> {t.courses.title} <Mic2 className="text-sky hidden sm:block" />
         </h1>
       </motion.div>
@@ -64,49 +68,97 @@ export const Courses: React.FC = () => {
               viewport={{ once: true }}
               transition={{ type: "spring", bounce: 0.4, delay: index * 0.1 }}
             >
-              <Card className="overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-2xl border-[8px] md:border-[12px] border-white group bg-white hover:scale-105 transition-all duration-500">
-                <div className="relative h-64 md:h-96 overflow-hidden">
-                  <div className={`absolute inset-0 ${index % 2 === 0 ? 'bg-sky' : 'bg-krishnachura'} opacity-50 transition-opacity`}></div>
-                  <div className="absolute top-6 md:top-10 right-6 md:right-10 bg-white p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] text-primary shadow-2xl transform">
-                    <div className={`${index % 2 === 0 ? 'text-sky' : 'text-krishnachura'} w-8 h-8 md:w-12 md:h-12`}>
-                      <BookOpen className="w-full h-full" />
+              <Card className={`overflow-hidden rounded-[2.5rem] md:rounded-[4rem] shadow-2xl border-[10px] md:border-[12px] border-white group transition-all duration-500 hover:scale-105 ${index === 0 ? 'bg-[#b7f9f4]' : 'bg-[#f5bdb9]'}`}>
+                <div className="p-8 md:p-12 flex flex-col items-center h-[540px]">
+                  <div className={`bg-white/70 backdrop-blur-md px-4 py-2 md:px-6 md:py-3 rounded-full text-primary shadow-lg flex items-center justify-center gap-3 border-2 ${index % 2 === 0 ? 'border-sky' : 'border-krishnachura'} w-fit`}>
+                    <div className={`${index % 2 === 0 ? 'text-sky' : 'text-krishnachura'} w-6 h-6 md:w-8 md:h-8`}>
+                      {course.id === 'music-course' ? <Music2 className="w-full h-full" /> : <Drama className="w-full h-full" />}
                     </div>
-                  </div>
-                  <div className="absolute bottom-6 md:bottom-10 left-6 md:left-12">
-                    <h3 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
+                    <h2 className={`font-black text-3xl md:text-4xl whitespace-nowrap ${index === 0 ? 'text-[#000308]' : 'text-[#030000]'}`}>
                       {language === 'bn' ? course.titleBn : course.titleEn}
-                    </h3>
+                    </h2>
+                  </div>
+
+                  <div className="w-full mt-8 p-6 md:p-8 bg-white/50 rounded-[2rem] border-x-4 border-b-4 border-t-0 border-accent text-primary font-black space-y-4">
+                    <h4 className={`text-[24px] font-black mb-4 text-center ${index === 0 ? 'text-[#000307]' : 'text-[#000e1c]'}`}>ভর্তি সংক্রান্ত তথ্য</h4>
+                    <ul className="space-y-3 text-base md:text-lg font-bold">
+                      <li className="flex gap-2"><span>*</span> <span className="text-left font-bold">সময়সীমা: ০১ জুলাই’২৬ - ১৬ জুলাই’২৬</span></li>
+                      <li className="flex gap-2"><span>*</span> <span className="font-bold">ভর্তি ফি: ৫০০/-</span></li>
+                      <li className="flex gap-2"><span>*</span> <span className="font-bold">ভর্তি যোগ্যতা: ৩য় শ্রেণি থেকে ৮ম শ্রেণির শিক্ষার্থী হতে হবে</span></li>
+                    </ul>
+                    {index === 0 ? (
+                      <div className="mt-6 p-4 bg-accent/50 rounded-2xl text-primary font-black border-2 border-[#00ffe8] text-center">
+                        একসাথে দুটি কোর্স এ ভর্তি হলে ভর্তি ফি ৯০০/-
+                      </div>
+                    ) : (
+                      <div className="mt-6 p-4 bg-accent/50 rounded-2xl text-primary font-black border-2 border-[#ad1900] text-center md:text-left md:w-[267px] md:h-[66px] md:pl-[16px] md:ml-[0px] flex items-center justify-center">
+                        একসাথে দুটি কোর্স এ ভর্তি হলে ভর্তি ফি ৯০০/-
+                      </div>
+                    )}
                   </div>
                 </div>
                 
-                <CardContent className="p-8 md:p-16 space-y-8 md:space-y-10">
-                  <p className="text-lg md:text-2xl text-primary/70 leading-relaxed font-black whitespace-pre-line">
-                    {language === 'bn' ? course.descriptionBn : course.descriptionEn}
-                  </p>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-                    <div className="flex items-center gap-4 md:gap-5 p-4 md:p-6 bg-accent rounded-[1.5rem] md:rounded-[2rem] shadow-inner">
-                      <Clock className="w-8 h-8 md:w-10 md:h-10 text-marigold" />
-                      <div>
-                        <div className="text-[10px] md:text-sm uppercase tracking-widest text-primary/40 font-black">Time</div>
-                        <div className="font-black text-xl md:text-2xl text-primary">{course.duration}</div>
+                {expandedStates[course.id] && (
+                  <CardContent className="p-8 md:p-16 pt-[25px] pb-[40px] space-y-8 md:space-y-10">
+                    {course.id === 'music-course' ? (
+                      <div className="space-y-8 md:space-y-10">
+                        {/* Point 1: কোর্স সংক্রান্ত তথ্য */}
+                        <div className="p-6 md:p-8 bg-white/50 rounded-[2rem] border-4 border-accent text-primary font-black space-y-4">
+                          <h3 className="text-2xl md:text-3xl font-black mb-4 text-[#070000]">কোর্স সংক্রান্ত তথ্য</h3>
+                          <ul className="space-y-3 text-base md:text-lg font-bold">
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শুরু: ১৭ জুলাই ২০ ২৬</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">ক্লাসের সময়:  শুক্রবার সকাল ৯:৩০ মিনিট</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">ক্লাসের স্থান: School of the Nation (SON), Banasree</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">মাসিক ফি: ৫০০/-</span></li>
+                          </ul>
+                        </div>
+
+                        {/* Point 2: বিশেষ সুযোগ */}
+                        <div className="p-6 md:p-8 bg-white/50 rounded-[2rem] border-4 border-accent text-primary font-black space-y-4">
+                          <h3 className="text-2xl md:text-3xl font-black mb-4 text-[#000000]">বিশেষ সুযোগ</h3>
+                          <ul className="space-y-3 text-base md:text-lg font-bold">
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">সংগীতের বেসিক, সুর, তাল ও কণ্ঠচর্চার প্রশিক্ষণ</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কণ্ঠস্বরের সৌন্দর্য বৃদ্ধি ও আত্মবিশ্বাসের সাথে গান পরিবেশন শেখানো</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শেষে বিশেষ Theme Song এ অংশগ্রহণের সুযোগ</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শেষে থাকছে আকর্ষনীয় সার্টিফিকেট</span></li>
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-4 md:gap-5 p-4 md:p-6 bg-accent rounded-[1.5rem] md:rounded-[2rem] shadow-inner">
-                      <CreditCard className="w-8 h-8 md:w-10 md:h-10 text-paddy" />
-                      <div>
-                        <div className="text-[10px] md:text-sm uppercase tracking-widest text-primary/40 font-black">Fee</div>
-                        <div className="font-black text-xl md:text-2xl text-primary">{course.fee}</div>
+                    ) : (
+                      <div className="space-y-8 md:space-y-10">
+                        {/* Point 1: কোর্স সংক্রান্ত তথ্য */}
+                        <div className="p-6 md:p-8 bg-white/50 rounded-[2rem] border-4 border-accent text-primary font-black space-y-4">
+                          <h3 className="text-2xl md:text-3xl font-black mb-4 text-[#000a19]">কোর্স সংক্রান্ত তথ্য</h3>
+                          <ul className="space-y-3 text-base md:text-lg font-bold">
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শুরু: ১৮ জুলাই ২০২৬</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">ক্লাসের সময়: শনিবার সকাল ৯:৩০ মিনিট</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">ক্লাসের স্থান: School of the Nation (SON), Banasree</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">মাসিক ফি: ৫০০/-</span></li>
+                          </ul>
+                        </div>
+
+                        {/* Point 2: বিশেষ সুযোগ */}
+                        <div className="p-6 md:p-8 bg-white/50 rounded-[2rem] border-4 border-accent text-primary font-black space-y-4">
+                          <h3 className="text-2xl md:text-3xl font-black mb-4 text-[#000f1f]">বিশেষ সুযোগ</h3>
+                          <ul className="space-y-3 text-base md:text-lg font-bold">
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">অভিনয় বেসিক, মুখের অভিব্যক্তি, সংলাপ উপস্থাপন ও চরিত্র অভিনয়ের প্রশিক্ষণ</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">আত্মভিশ্বাস বৃদ্ধি ও মঞ্চে পারফরম্যান্স দক্ষতা উন্নয়ন</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শেষে মঞ্চনাটকে অভিনয় করার বিশেষ সুযোগ</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শেষে থাকছে আকর্ষনীয় সার্টিফিকেট</span></li>
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </CardContent>
+                    )}
+                  </CardContent>
+                )}
+
                 
-                <CardFooter className="p-8 md:p-16 pt-0 flex gap-4">
-                  <Button asChild className="flex-1 bg-krishnachura text-black hover:bg-paddy hover:text-white py-8 md:py-12 rounded-[1.5rem] md:rounded-[2.5rem] text-2xl md:text-3xl font-black transition-all shadow-2xl shadow-krishnachura/30 border-none">
-                    <Link to="/admission" className="flex items-center justify-center gap-4">
-                      Join Now! <ArrowRight className="w-8 h-8 md:w-10 md:h-10" />
-                    </Link>
+                <CardFooter className="p-8 md:p-16 pt-0 flex gap-4 h-[150px] border-0 items-center">
+                  <Button 
+                    onClick={() => expandedStates[course.id] ? navigate('/admission') : toggleExpanded(course.id)}
+                    className="flex-1 bg-blue-600 text-white hover:bg-orange-500 py-6 md:py-8 rounded-[1.2rem] md:rounded-[2.2rem] text-xl md:text-2xl font-black transition-all shadow-2xl shadow-blue-500/30 border-none flex items-center justify-center gap-4"
+                  >
+                    {expandedStates[course.id] ? "ভর্তি হোন!" : "বিস্তারিত দেখুন"} <ArrowRight className="w-6 h-6 md:w-8 md:h-8" />
                   </Button>
                 </CardFooter>
               </Card>

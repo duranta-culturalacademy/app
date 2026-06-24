@@ -149,7 +149,20 @@ export const DashboardHome: React.FC = () => {
                   </div>
                   <div className="text-right shrink-0">
                     <p className="text-[10px] md:text-sm font-black text-krishnachura">New</p>
-                    <p className="text-[10px] md:text-xs font-black text-primary/20">{activity.createdAt?.toDate().toLocaleDateString()}</p>
+                    <p className="text-[10px] md:text-xs font-black text-primary/20">
+                      {(() => {
+                        if (!activity.createdAt) return '';
+                        if (typeof activity.createdAt.toDate === 'function') {
+                          try {
+                            return activity.createdAt.toDate().toLocaleDateString();
+                          } catch (e) {
+                            console.warn("Error converting createdAt to Date:", e);
+                          }
+                        }
+                        const d = new Date(activity.createdAt);
+                        return !isNaN(d.getTime()) ? d.toLocaleDateString() : '';
+                      })()}
+                    </p>
                   </div>
                 </div>
               ))}

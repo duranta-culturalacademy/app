@@ -1,0 +1,71 @@
+import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import { collection, query, onSnapshot, orderBy, limit } from 'firebase/firestore';
+import { db } from '../lib/firebase';
+import { Bell, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+export const NoticeTicker: React.FC = () => {
+  const { language } = useLanguage();
+  const [notices, setNotices] = useState<any[]>([]);
+
+  useEffect(() => {
+    const q = query(collection(db, 'notices'), orderBy('date', 'desc'), limit(5));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setNotices(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    }, (error) => {
+      console.error("Failed to fetch ticker notices:", error);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Standard elegant general notices if none are present in Firestore
+  const defaultNotices = language === 'bn' ? [
+    'আগামী ০১ জুলাই ২০২৬ থেকে শুরু হচ্ছে দুরন্ত কালচারাল একাডেমির সঙ্গীত ও অভিনয় কোর্সের নতুন ব্যাচের রেজিস্ট্রেশন | বিস্তারিত জানতে আমাদের ফেসবুক পেজের সাথে যুক্ত থাকুন |'
+  ] : [
+    'Registration for the new batch of Music and Acting courses at Duronto Cultural Academy starts on July 01, 2026 | Follow our Facebook page to learn more |'
+  ];
+
+  const displayedNotices = notices.length > 0 
+    ? notices.map(n => language === 'bn' ? n.titleBn : n.titleEn)
+    : defaultNotices;
+
+  const joinedText = displayedNotices.join('  ✦  ');
+
+  return (
+    <div className="w-full max-w-[calc(100%-2rem)] md:max-w-[calc(100%-6rem)] lg:w-[1200px] mx-auto px-1 sm:px-0 z-40 relative select-none">
+      <div className="flex items-center bg-orange-50/65 dark:bg-orange-950/20 backdrop-blur-md border border-orange-200/60 dark:border-orange-900/40 rounded-full h-11 sm:h-12 shadow-md shadow-orange-100/10 dark:shadow-none overflow-hidden pl-1 pr-4">
+        {/* notice tag */}
+        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-xs sm:text-sm uppercase tracking-wider px-3 sm:px-5 py-1.5 sm:py-2 rounded-full flex items-center gap-1.5 shrink-0 z-10 shadow-sm">
+          <Bell size={14} className="animate-bounce shrink-0" />
+          <span>
+            {language === 'bn' ? 'নোটিশ' : 'Notice'}
+          </span>
+          <span className="hidden sm:inline w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>
+        </div>
+
+        {/* separator icon */}
+        <Sparkles size={14} className="text-orange-500 mx-2 animate-pulse shrink-0" />
+
+        {/* native marquee tag with modern parameters */}
+        <Link 
+          to="/notices" 
+          className="flex-grow font-['Anek_Bangla'] font-bold text-xs sm:text-base text-orange-950 dark:text-orange-100 overflow-hidden leading-none hover:text-[#fc6625] dark:hover:text-amber-400 transition-colors cursor-pointer"
+        >
+          {React.createElement(
+            'marquee',
+            {
+              behavior: 'scroll',
+              direction: 'left',
+              scrollamount: '5',
+              onMouseOver: (e: any) => e.currentTarget.stop(),
+              onMouseOut: (e: any) => e.currentTarget.start(),
+              className: 'w-full block pt-[4px]'
+            } as any,
+            joinedText
+          )}
+        </Link>
+      </div>
+    </div>
+  );
+};

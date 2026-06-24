@@ -4,6 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Duronto Cultural Academy</title>
+    <script>
+      // Suppress cross-origin "Script error." messages originating from nested iframes (e.g. Google Forms)
+      window.addEventListener('error', function(e) {
+        if (e.message === 'Script error.' || !e.filename) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          return true;
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', function(e) {
+        if (e.reason && (e.reason.message === 'Script error.' || String(e.reason).includes('Script error'))) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+        }
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

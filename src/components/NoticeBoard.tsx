@@ -85,11 +85,16 @@ export const NoticeBoard: React.FC = () => {
                   <div className="flex flex-col md:flex-row">
                     <div className="w-full md:w-48 bg-marigold flex flex-col items-center justify-center p-8 text-black">
                       <Calendar size={40} className="mb-2" />
-                      <div className="text-3xl font-black">{notice.date.split('-')[2]}</div>
+                      <div className="text-3xl font-black">{(notice.date && notice.date.split('-')[2]) || ''}</div>
                       <div className="text-sm font-black uppercase tracking-widest opacity-60">
-                        {new Date(notice.date).toLocaleDateString('default', { month: 'short' })}
+                        {(() => {
+                          if (!notice.date) return '';
+                          const d = new Date(notice.date);
+                          if (isNaN(d.getTime())) return '';
+                          return d.toLocaleDateString('default', { month: 'short' });
+                        })()}
                       </div>
-                      <div className="text-sm font-black opacity-30 mt-1">{notice.date.split('-')[0]}</div>
+                      <div className="text-sm font-black opacity-30 mt-1">{(notice.date && notice.date.split('-')[0]) || ''}</div>
                     </div>
                     <CardContent className="flex-grow p-8 md:p-14 space-y-6">
                       <div className="flex justify-between items-start">

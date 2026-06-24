@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from './ui/button';
 import { Menu, X, Globe, Music, Music2, Mic2, ShieldCheck, Sun, Moon } from 'lucide-react';
@@ -12,11 +12,18 @@ export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
-      return document.documentElement.classList.contains('dark') || localStorage.getItem('theme') === 'dark';
+      try {
+        return document.documentElement.classList.contains('dark') || localStorage.getItem('theme') === 'dark';
+      } catch (e) {
+        console.warn("localStorage is not available:", e);
+        return document.documentElement.classList.contains('dark');
+      }
     }
     return false;
   });
   const location = useLocation();
+  const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState<string>('hero');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -27,91 +34,161 @@ export const Navbar: React.FC = () => {
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+      try {
+        localStorage.setItem('theme', 'dark');
+      } catch (e) {
+        console.warn("localStorage is not available:", e);
+      }
     } else {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+      try {
+        localStorage.setItem('theme', 'light');
+      } catch (e) {
+        console.warn("localStorage is not available:", e);
+      }
     }
   }, [isDark]);
 
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setActiveSection('');
+      return;
+    }
+
+    const sections = ['hero', 'about', 'courses', 'gallery', 'contact'];
+    
+    const handleScrollSpy = () => {
+      let currentActive = 'hero';
+      const scrollPosition = window.scrollY + 250; // offset threshold for active state
+      
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            currentActive = section;
+          }
+        }
+      }
+      setActiveSection(currentActive);
+    };
+
+    window.addEventListener('scroll', handleScrollSpy);
+    handleScrollSpy();
+    return () => window.removeEventListener('scroll', handleScrollSpy);
+  }, [location.pathname]);
+
   const navLinks = [
-    { name: t.nav.home, path: '/' },
-    { name: t.nav.about, path: '/about' },
-    { name: t.nav.courses, path: '/courses' },
-    { name: t.nav.gallery, path: '/gallery' },
-    { name: t.nav.notices, path: '/notices' },
-    { name: t.nav.contact, path: '/contact' },
+    { name: t.nav.home, path: '/', sectionId: 'hero' },
+    { name: t.nav.about, path: '/about', sectionId: 'about' },
+    { name: t.nav.courses, path: '/courses', sectionId: 'courses' },
+    { name: t.nav.gallery, path: '/gallery', sectionId: 'gallery' },
+    { name: t.nav.notices, path: '/notices', sectionId: '' },
+    { name: t.nav.contact, path: '/contact', sectionId: 'contact' },
   ];
 
-  return (
-    <nav className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-white/80 backdrop-blur-lg shadow-2xl' : 'bg-accent'}`}>
-      {/* Musical Stave Accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-krishnachura opacity-50"></div>
+  const handleNavClick = (link: typeof navLinks[0], e: React.MouseEvent) => {
+    if (link.sectionId) {
+      e.preventDefault();
       
-      <div className="container mx-auto px-6">
-        <div className={`flex items-center justify-between transition-all duration-500 relative ${scrolled ? 'h-16 md:h-24' : 'h-18 md:h-32'}`}>
-          <Link to="/" className="flex items-center gap-2 md:gap-4 group">
-            <div className={`flex items-center justify-center overflow-hidden transition-all group-hover:scale-105 aspect-square ${scrolled ? 'w-[47px] h-[47px] md:w-[63px] md:h-[63px]' : 'w-[71px] h-[71px] md:w-[135px] md:h-[135px]'}`}>
-              <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+      if (location.pathname === '/') {
+        const element = document.getElementById(link.sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else {
+        try {
+          sessionStorage.setItem('pendingScrollSection', link.sectionId);
+        } catch (e) {
+          console.warn("sessionStorage is not available:", e);
+        }
+        navigate('/');
+      }
+      setIsOpen(false);
+    }
+  };
+
+  return (
+    <nav className={`fixed top-6 z-50 transition-all duration-500 rounded-full bg-white/30 backdrop-blur-md border border-white/20 pl-[4px] pr-[8px] pb-[5px] pt-[5px] max-w-[calc(100%-2rem)] md:max-w-[calc(100%-6rem)] lg:max-w-full lg:left-1/2 lg:-translate-x-1/2 lg:right-auto lg:w-[1200px] lg:h-[93px] h-[76px] left-4 right-4 md:left-12 md:right-12 ${scrolled ? 'shadow-2xl' : 'shadow-lg'}`}>
+      
+      <div className="container mx-auto px-2">
+        <div className="flex items-center justify-between transition-all duration-500 relative mt-[6px] lg:mt-0 h-16 lg:h-20">
+          <Link to="/" onClick={(e) => {
+            if (location.pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }} className="flex items-center gap-2 md:gap-4 group transition-all duration-500 lg:w-[290px] lg:h-[100px] w-auto h-auto">
+            <div className="flex items-center justify-center transition-all group-hover:scale-105">
+              <img 
+                src="/logo.png" 
+                alt="Logo" 
+                className="object-cover transition-all duration-500 pl-[2px] pb-[8px] lg:pl-[0px] lg:pb-[0px] w-[50px] h-[65px] lg:w-[90px] lg:h-[104px] ml-[12px] lg:ml-[15px]" 
+                referrerPolicy="no-referrer" 
+              />
             </div>
             <div className="flex flex-col justify-start">
-              <span className={`font-black text-primary uppercase tracking-widest leading-none transition-all org-name ${language === 'en' ? 'org-name-en' : 'org-name-bn'} ${
-                scrolled 
-                  ? (language === 'en' ? 'text-[14px] md:text-[16px]' : 'text-[18px] md:text-[20px]')
-                  : (language === 'en' ? 'text-[18px] md:text-[22px]' : 'text-[22px] md:text-[26px]')
-              }`}>
+              <span className={`font-['Anek_Bangla'] font-bold text-left block text-primary uppercase tracking-widest transition-all org-name w-[114px] pb-0 pt-0 leading-[14px] lg:w-[185px] lg:text-[22px] lg:leading-[30px] lg:h-auto ${language === 'bn' ? 'h-[33px] text-[15px]' : 'h-[42px] text-[14px]'}`}>
                 {language === 'bn' ? 'দুরন্ত কালচারাল একাডেমি' : 'Duronto Cultural Academy'}
               </span>
-              <span className={`font-black text-black dark:text-gray-400 uppercase tracking-tighter leading-none transition-all mt-1 org-subtitle ${scrolled ? 'text-[10px] md:text-[12px]' : 'text-[12px] md:text-[14px]'}`}>
-                {language === 'bn' ? 'সঙ্গীত ও অভিনয় শিক্ষা কেন্দ্র' : 'Center for Music & Arts'}
+              <span className="font-black text-[#041122] uppercase tracking-tighter leading-none transition-all mt-0 org-subtitle lg:text-[12px] text-[8px] sm:text-[11px] md:text-[14px]">
+                {language === 'bn' ? 'শিল্প ও সংস্কৃতি চর্চায় আমরা দুরন্ত' : 'Center for Music & Arts'}
               </span>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
-            {navLinks.map((link) => (
-              <motion.div key={link.path} whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
-                <Link
-                  to={link.path}
-                  className={`font-black uppercase tracking-widest transition-all px-3 xl:px-6 py-3 rounded-2xl whitespace-nowrap ${
-                    location.pathname === link.path 
-                      ? 'bg-[#fc6625] text-white shadow-2xl scale-105' 
-                      : link.path === '/courses'
-                        ? 'text-black hover:bg-paddy hover:text-white text-xs xl:text-lg'
-                        : scrolled 
-                          ? 'text-primary hover:bg-primary/5 text-[10px] xl:text-sm' 
-                          : 'text-primary hover:bg-white/20 text-xs xl:text-lg'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              </motion.div>
-            ))}
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+            {navLinks.map((link, index) => {
+              const isActive = (location.pathname === '/' && link.sectionId && activeSection === link.sectionId) || 
+                (location.pathname !== '/' && location.pathname === link.path) ||
+                (link.sectionId === 'hero' && location.pathname === '/' && activeSection === '');
+
+              return (
+                <motion.div key={link.path} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    to={link.path}
+                    onClick={(e) => handleNavClick(link, e)}
+                    className={`font-bold uppercase tracking-wide transition-all px-3 py-2 rounded-full whitespace-nowrap text-xs xl:text-sm ${
+                      index === 0 
+                        ? 'border-0' 
+                        : ''
+                    } ${
+                      isActive 
+                        ? 'bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-sm' 
+                        : 'text-blue-600 hover:bg-orange-100/50 hover:text-orange-600'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
 
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsDark(!isDark)}
-              className={`rounded-2xl transition-all ${scrolled ? 'text-primary' : 'text-primary text-xl'}`}
+              className="rounded-full text-blue-600"
             >
-              {isDark ? <Sun size={28} /> : <Moon size={28} />}
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </Button>
 
             <Button
               variant="ghost"
-              size="lg"
+              size="sm"
               onClick={() => setLanguage(language === 'bn' ? 'en' : 'bn')}
-              className={`rounded-2xl font-black flex items-center gap-3 transition-all ${scrolled ? 'text-primary hover:bg-primary/5' : 'text-primary hover:bg-white/20 text-xl'}`}
+              className="font-bold flex items-center gap-1.5 border border-solid border-[1px] rounded-[6.35544px] bg-[#ff7d31] text-white hover:bg-[#ff7d31]/90"
             >
-              <Globe size={scrolled ? 20 : 28} className="text-black dark:text-white" />
+              <Globe size={18} />
               {language === 'bn' ? 'EN' : 'বাংলা'}
             </Button>
             
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button asChild className={`bg-secondary text-white hover:bg-krishnachura rounded-2xl px-12 py-8 font-black shadow-2xl border-none transition-all ${scrolled ? 'text-lg' : 'text-2xl'}`}>
+              <Button asChild className="bg-gradient-to-r from-green-400 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-700 rounded-full px-5 py-2 font-bold text-sm shadow-md border-none transition-all">
                 <Link to="/admission">{t.nav.admission}</Link>
               </Button>
             </motion.div>
@@ -147,21 +224,31 @@ export const Navbar: React.FC = () => {
                     </SheetTitle>
                   </SheetHeader>
                   <div className="flex flex-col gap-2 p-8">
-                    {navLinks.map((link) => (
-                      <Link
-                        key={link.path}
-                        to={link.path}
-                        onClick={() => setIsOpen(false)}
-                        className={`text-2xl font-bold py-3 transition-colors whitespace-nowrap ${
-                          location.pathname === link.path ? 'text-secondary' : 'text-primary/70 dark:text-white/70 hover:text-primary'
-                        }`}
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
+                      {navLinks.map((link) => {
+                        const isActive = (location.pathname === '/' && link.sectionId && activeSection === link.sectionId) || 
+                          (location.pathname !== '/' && location.pathname === link.path) ||
+                          (link.sectionId === 'hero' && location.pathname === '/' && activeSection === '');
+
+                        return (
+                          <Link
+                            key={link.path}
+                            to={link.path}
+                            onClick={(e) => {
+                              handleNavClick(link, e);
+                            }}
+                            className={`text-xl font-black py-4 px-6 rounded-full transition-all duration-300 flex items-center gap-3 ${
+                              isActive 
+                                ? 'bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-md' 
+                                : 'text-blue-600 hover:bg-orange-100 hover:text-orange-600'
+                            }`}
+                          >
+                            {link.name}
+                          </Link>
+                        );
+                      })}
                   </div>
                   <div className="mt-auto p-8 border-t border-gray-100 dark:border-white/10">
-                    <Button asChild className="w-full bg-secondary text-white hover:bg-krishnachura rounded-xl py-6 font-bold text-lg" onClick={() => setIsOpen(false)}>
+                    <Button asChild className="w-full bg-gradient-to-r from-green-400 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-700 rounded-full py-6 font-black text-lg" onClick={() => setIsOpen(false)}>
                       <Link to="/admission">{t.nav.admission}</Link>
                     </Button>
                   </div>
