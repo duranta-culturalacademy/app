@@ -45,7 +45,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
       <div className="p-8 border-b border-white/10">
         <div className="flex items-center gap-3 mb-2">
           <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center overflow-hidden border-2 border-secondary">
-            <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+            <img src="https://i.postimg.cc/BQc1fw58/logo.png" alt="Logo" className="w-full h-full object-cover" />
           </div>
           <span className="text-xl font-black tracking-tight leading-none">
             {t.hero.title.split(' ')[0]} <br/>

@@ -178,7 +178,7 @@ export const Home: React.FC = () => {
           >
             <motion.img 
               whileHover={{ scale: 1.05, rotate: 1 }}
-              src="/logo.png" 
+              src="https://i.postimg.cc/BQc1fw58/logo.png" 
               alt="Logo" 
               className="w-32 md:w-40 lg:w-48 h-auto object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.15)]"
               referrerPolicy="no-referrer"

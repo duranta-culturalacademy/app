@@ -80,7 +80,7 @@ export const Admin: React.FC = () => {
               </div>
               <div className="w-24 h-24 bg-white rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden border-4 border-secondary shadow-lg relative group">
                 <div className="absolute inset-0 bg-secondary/10 alpana-pattern"></div>
-                <img src="/logo.png" alt="Logo" className="w-full h-full object-cover relative z-10" />
+                <img src="https://i.postimg.cc/BQc1fw58/logo.png" alt="Logo" className="w-full h-full object-cover relative z-10" />
               </div>
               <CardTitle className="text-3xl md:text-4xl font-black uppercase tracking-widest flex items-center justify-center gap-3">
                 <Mic2 size={24} className="text-secondary" /> Admin Access

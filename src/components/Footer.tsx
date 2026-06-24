@@ -131,7 +131,7 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-4">
               <div className="w-[80px] h-[78px] flex items-center justify-center overflow-hidden rounded-2xl bg-white/10 p-2 border border-white/20 shadow-md relative group shrink-0">
                 <img 
-                  src="/logo.png" 
+                  src="https://i.postimg.cc/BQc1fw58/logo.png" 
                   alt="Duronto Logo" 
                   className="w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
