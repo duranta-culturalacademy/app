@@ -10,7 +10,7 @@ export const Gallery: React.FC = () => {
   const images = [
     {
       id: 1,
-      src: "/1.jpg",
+      src: "https://1024terabox.com/s/1oQ1bWinuxFwSJeocBpvDXQ",
       fallback: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800",
       title: "Stage Perform 2018",
       description: "Natok 'Antanagar Express' Moment's",
