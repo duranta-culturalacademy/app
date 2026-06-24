@@ -124,7 +124,7 @@ export const Navbar: React.FC = () => {
               <img 
                 src="/logo.png" 
                 alt="Logo" 
-                className="object-cover transition-all duration-500 pl-[2px] pb-[8px] lg:pl-[0px] lg:pb-[0px] w-[50px] h-[65px] lg:w-[90px] lg:h-[104px] ml-[12px] lg:ml-[15px]" 
+                className="object-cover transition-all duration-500 pl-[2px] pb-[4px] lg:pl-[0px] lg:pb-[0px] w-[50px] h-[47px] sm:w-[65px] sm:h-[61px] md:w-[78px] md:h-[74px] lg:w-[90px] lg:h-[85px] ml-[12px] lg:ml-[15px]" 
                 referrerPolicy="no-referrer" 
               />
             </div>
