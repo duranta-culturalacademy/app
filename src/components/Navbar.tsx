@@ -150,7 +150,7 @@ export const Navbar: React.FC = () => {
                   <Link
                     to={link.path}
                     onClick={(e) => handleNavClick(link, e)}
-                    style={isActive ? { backgroundColor: '#fc7441' } : { color: '#f75113' }}
+                    style={isActive ? { backgroundColor: '#fc7441' } : { color: '#ffffff' }}
                     className={`font-bold uppercase tracking-wide transition-all px-3 py-2 rounded-full whitespace-nowrap text-xs xl:text-sm ${
                       index === 0 
                         ? 'border-0' 
@@ -237,7 +237,7 @@ export const Navbar: React.FC = () => {
                             onClick={(e) => {
                               handleNavClick(link, e);
                             }}
-                            style={isActive ? { backgroundColor: '#fc7441' } : { color: '#f75113' }}
+                            style={isActive ? { backgroundColor: '#fc7441' } : { color: '#ffffff' }}
                             className={`text-xl font-black py-4 px-6 rounded-full transition-all duration-300 flex items-center gap-3 ${
                               isActive 
                                 ? 'text-white shadow-md' 

@@ -597,7 +597,7 @@ export const Home: React.FC = () => {
             <div className="shrink-0 flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-xl border-2 border-primary/20 hover:scale-110 transition-transform duration-300 overflow-hidden">
               <img 
                 src="https://i.postimg.cc/J7X7w1FV/Duranta-Theater-Logo.png" 
-                alt="Duronto Kishor Theater Logo" 
+                alt="Duronto Theater Logo" 
                 className="w-full h-full object-contain p-1" 
                 referrerPolicy="no-referrer"
               />
@@ -605,7 +605,7 @@ export const Home: React.FC = () => {
             {/* Content area */}
             <div className="flex-1 space-y-2 text-center sm:text-left">
               <h4 className="text-xl md:text-2xl font-extrabold text-heading">
-                {language === 'bn' ? 'দুরন্ত কিশোর থিয়েটার' : 'Duronto Kishor Theater'}
+                {language === 'bn' ? 'দুরন্ত থিয়েটার' : 'Duronto Theater'}
               </h4>
               <p className="text-base text-body leading-relaxed text-justify">
                 {language === 'bn' 
