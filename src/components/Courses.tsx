@@ -83,7 +83,17 @@ export const Courses: React.FC = () => {
                     <h4 className={`text-[24px] font-black mb-4 text-center ${index === 0 ? 'text-[#000307]' : 'text-[#000e1c]'}`}>ভর্তি সংক্রান্ত তথ্য</h4>
                     <ul className="space-y-3 text-base md:text-lg font-bold">
                       <li className="flex gap-2"><span>*</span> <span className="text-left font-bold">সময়সীমা: ০১ জুলাই’২৬ - ১৬ জুলাই’২৬</span></li>
-                      <li className="flex gap-2"><span>*</span> <span className="font-bold">ভর্তি ফি: ৫০০/-</span></li>
+                      <li className="flex flex-col">
+                        <div className="flex gap-2">
+                          <span>*</span>
+                          <span className="font-bold">
+                            ভর্তি ফি: <span className="line-through text-red-500/90">১০০০/-</span>, ৫০০/-
+                          </span>
+                        </div>
+                        <div className="pl-4 text-[13px] md:text-[15px] font-black text-emerald-600 dark:text-emerald-500 mt-0.5">
+                          (১২ জুলাই ২০২৬ এর মধ্যে ভর্তি হলে ৫০% ছাড়)
+                        </div>
+                      </li>
                       <li className="flex gap-2"><span>*</span> <span className="font-bold">ভর্তি যোগ্যতা: ৩য় শ্রেণি থেকে ৮ম শ্রেণির শিক্ষার্থী হতে হবে</span></li>
                     </ul>
                     {index === 0 ? (

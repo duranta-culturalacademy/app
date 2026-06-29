@@ -55,18 +55,39 @@ export const Home: React.FC = () => {
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
+  const carouselImages = [
+    "https://i.postimg.cc/8CTFn85p/image1.jpg",
+    "https://i.postimg.cc/tR6xTNLV/image2.png",
+    "https://i.postimg.cc/yxCW922t/image3.png",
+    "https://i.postimg.cc/3xq8mPGT/image4.png"
+  ];
+
+  const [currentBgIndex, setCurrentBgIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentBgIndex((prev) => (prev + 1) % carouselImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="flex flex-col gap-0 pb-0 musical-vibe">
       {/* Hero Section */}
       <section id="hero" className="scroll-mt-24 lg:scroll-mt-36 relative h-screen flex items-center justify-center overflow-hidden bg-primary">
         <div className="absolute inset-0 z-0">
-          <motion.img
-            style={{ y: y1, paddingLeft: '0px' }}
-            src="/Duranta_Grope_Photo.JPG"
-            alt="Cultural Background"
-            className="absolute inset-0 w-full h-full object-cover opacity-60 border-0"
-            referrerPolicy="no-referrer"
-          />
+          {carouselImages.map((src, index) => (
+            <motion.img
+              key={src}
+              style={{ y: y1, paddingLeft: '0px' }}
+              src={src}
+              alt={`Cultural Background ${index + 1}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[3000ms] ease-in-out border-0 ${
+                index === currentBgIndex ? 'opacity-60' : 'opacity-0 pointer-events-none'
+              }`}
+              referrerPolicy="no-referrer"
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/20 to-accent/40"></div>
         </div>
 
@@ -573,8 +594,13 @@ export const Home: React.FC = () => {
             className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-6 lg:p-8 border-4 border-solid border-primary/30 rounded-3xl bg-primary/5 backdrop-blur-sm text-left hover:border-primary/50 transition-all duration-300"
           >
             {/* Logo area */}
-            <div className="shrink-0 flex items-center justify-center w-20 h-20 bg-gradient-to-tr from-[#fc6625] to-[#ff8f59] text-white rounded-2xl shadow-xl shadow-[#fc6625]/20 hover:scale-110 transition-transform duration-300">
-              <Theater size={40} className="stroke-[1.5]" />
+            <div className="shrink-0 flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-xl border-2 border-primary/20 hover:scale-110 transition-transform duration-300 overflow-hidden">
+              <img 
+                src="https://i.postimg.cc/J7X7w1FV/Duranta-Theater-Logo.png" 
+                alt="Duronto Kishor Theater Logo" 
+                className="w-full h-full object-contain p-1" 
+                referrerPolicy="no-referrer"
+              />
             </div>
             {/* Content area */}
             <div className="flex-1 space-y-2 text-center sm:text-left">

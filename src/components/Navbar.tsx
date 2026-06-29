@@ -150,14 +150,15 @@ export const Navbar: React.FC = () => {
                   <Link
                     to={link.path}
                     onClick={(e) => handleNavClick(link, e)}
+                    style={isActive ? { backgroundColor: '#fc7441' } : { color: '#f75113' }}
                     className={`font-bold uppercase tracking-wide transition-all px-3 py-2 rounded-full whitespace-nowrap text-xs xl:text-sm ${
                       index === 0 
                         ? 'border-0' 
                         : ''
                     } ${
                       isActive 
-                        ? 'bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-sm' 
-                        : 'text-blue-600 hover:bg-orange-100/50 hover:text-orange-600'
+                        ? 'text-white shadow-sm' 
+                        : 'hover:bg-orange-100/50 hover:text-orange-600'
                     }`}
                   >
                     {link.name}
@@ -236,10 +237,11 @@ export const Navbar: React.FC = () => {
                             onClick={(e) => {
                               handleNavClick(link, e);
                             }}
+                            style={isActive ? { backgroundColor: '#fc7441' } : { color: '#f75113' }}
                             className={`text-xl font-black py-4 px-6 rounded-full transition-all duration-300 flex items-center gap-3 ${
                               isActive 
-                                ? 'bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-md' 
-                                : 'text-blue-600 hover:bg-orange-100 hover:text-orange-600'
+                                ? 'text-white shadow-md' 
+                                : 'hover:bg-orange-100 hover:text-orange-600'
                             }`}
                           >
                             {link.name}
