@@ -1,0 +1,12 @@
+{
+  "logoUrl": "https://i.postimg.cc/BQc1fw58/logo.png",
+  "glowColor": "rgba(252, 102, 37, 0.4)",
+  "particleCount": 16,
+  "fadeInDuration": 0.8,
+  "glowDuration": 1.5,
+  "revealDuration": 0.6,
+  "holdDuration": 4.5,
+  "fadeOutDuration": 0.8,
+  "titleText": "দুরন্ত কালচারাল একাডেমি",
+  "subtitleText": "শিল্প ও সংস্কৃতি চর্চায় আমরা দুরন্ত"
+}

@@ -42,7 +42,7 @@ export const About: React.FC = () => {
               {t.hero.subtitle}
             </p>
             <p className="text-lg md:text-2xl leading-relaxed font-black text-body">
-              Founded to make every child a star! Duronto Cultural Academy is a happy place where we learn music and acting while having the best time ever!
+              Founded to make every child a star! Duranta Cultural Academy is a happy place where we learn music and acting while having the best time ever!
             </p>
             <div className="flex flex-wrap gap-4 md:gap-6 justify-center lg:justify-start">
               <motion.div whileHover={{ scale: 1.1, rotate: -5 }} className="px-6 md:px-8 py-3 md:py-4 bg-krishnachura text-white rounded-[1.5rem] md:rounded-[2rem] font-black text-lg md:text-xl shadow-lg">Traditional</motion.div>

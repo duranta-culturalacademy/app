@@ -21,9 +21,9 @@ export const NoticeTicker: React.FC = () => {
 
   // Standard elegant general notices if none are present in Firestore
   const defaultNotices = language === 'bn' ? [
-    'আগামী ০১ জুলাই ২০২৬ থেকে শুরু হচ্ছে দুরন্ত কালচারাল একাডেমির সঙ্গীত ও অভিনয় কোর্সের নতুন ব্যাচের রেজিস্ট্রেশন | বিস্তারিত জানতে আমাদের ফেসবুক পেজের সাথে যুক্ত থাকুন |'
+    'দুরন্ত কালচারাল একাডেমির নতুন ব্যাচের কোর্সসমূহের রেজিস্ট্রেশন আগামী ০১ জুলাই ২০২৬ থেকে ১৫ জুলাই ২০২৬ পর্যন্ত চলবে। ১২ জুলাইয়ের মধ্যে রেজিস্ট্রেশন করলে ভর্তি ফি-তে ৫০% ছাড়। বিস্তারিত জানতে ক্লিক করুন।'
   ] : [
-    'Registration for the new batch of Music and Acting courses at Duronto Cultural Academy starts on July 01, 2026 | Follow our Facebook page to learn more |'
+    'Registration for the new batch of courses at Duranta Cultural Academy will run from July 01, 2026 to July 15, 2026. Register by July 12 to get a 50% discount on the admission fee. Click here for details.'
   ];
 
   const displayedNotices = notices.length > 0 
@@ -31,37 +31,37 @@ export const NoticeTicker: React.FC = () => {
     : defaultNotices;
 
   const formatNoticeText = (text: string) => {
-    if (text.includes("ফেসবুক পেজের")) {
-      const parts = text.split("ফেসবুক পেজের");
+    if (text.includes("ক্লিক করুন")) {
+      const parts = text.split("ক্লিক করুন");
       return (
         <span className="text-white">
           {parts[0]}
           <a 
-            href="https://www.facebook.com/duranta.culturalacademy.2012" 
+            href="https://duranta-culturalacademy.vercel.app/admission" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-blue-300 hover:text-blue-100 hover:underline font-black mx-1 inline-block"
+            className="text-blue-400 hover:text-blue-300 hover:underline font-black mx-1 inline-block"
             onClick={(e) => e.stopPropagation()}
           >
-            ফেসবুক পেজের
+            ক্লিক করুন
           </a>
           {parts[1]}
         </span>
       );
     }
-    if (text.includes("Facebook page")) {
-      const parts = text.split("Facebook page");
+    if (text.includes("Click here")) {
+      const parts = text.split("Click here");
       return (
         <span className="text-white">
           {parts[0]}
           <a 
-            href="https://www.facebook.com/duranta.culturalacademy.2012" 
+            href="https://duranta-culturalacademy.vercel.app/admission" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-blue-300 hover:text-blue-100 hover:underline font-black mx-1 inline-block"
+            className="text-blue-400 hover:text-blue-300 hover:underline font-black mx-1 inline-block"
             onClick={(e) => e.stopPropagation()}
           >
-            Facebook page
+            Click here
           </a>
           {parts[1]}
         </span>

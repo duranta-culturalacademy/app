@@ -106,7 +106,7 @@ export const translations = {
       admin: "Admin"
     },
     hero: {
-      title: "Duronto Cultural Academy",
+      title: "Duranta Cultural Academy",
       subtitle: "A unique institution for culture and art. We believe there is an artist hidden within every person.",
       cta: "Join Now"
     },

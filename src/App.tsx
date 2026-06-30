@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider } from './context/AuthContext';
@@ -16,8 +17,11 @@ import { NoticeTicker } from './components/NoticeTicker';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, ArrowUp } from 'lucide-react';
 import { ScrollToTop } from './components/ScrollToTop';
+import { Loader } from './components/Loader';
+import loaderConfig from './loader.config.json';
 
 function AppContent() {
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith('/admin');
 
@@ -26,7 +30,24 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-accent selection:bg-secondary selection:text-primary relative">
+    <>
+      <AnimatePresence mode="wait">
+        {loading && (
+          <Loader onComplete={() => setLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        animate={{
+          filter: loading ? "blur(12px)" : "blur(0px)",
+          scale: loading ? 0.98 : 1
+        }}
+        transition={{
+          duration: loaderConfig.fadeOutDuration,
+          ease: [0.645, 0.045, 0.355, 1.0]
+        }}
+        className="min-h-screen flex flex-col bg-accent selection:bg-secondary selection:text-primary relative"
+      >
       <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-blue-900/10 to-transparent" />
       <ScrollToTop />
       {!isAdminPage && <Navbar />}
@@ -70,7 +91,8 @@ function AppContent() {
       )}
       
       <Toaster position="top-center" />
-    </div>
+      </motion.div>
+    </>
   );
 }
 

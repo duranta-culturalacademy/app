@@ -128,13 +128,19 @@ export const Navbar: React.FC = () => {
                 referrerPolicy="no-referrer" 
               />
             </div>
-            <div className="flex flex-col justify-start">
-              <span className={`font-['Anek_Bangla'] font-bold text-left block text-primary uppercase tracking-widest transition-all org-name w-[114px] pb-0 pt-0 leading-[14px] lg:w-[185px] lg:text-[22px] lg:leading-[30px] lg:h-auto ${language === 'bn' ? 'h-[33px] text-[15px]' : 'h-[42px] text-[14px]'}`}>
-                {language === 'bn' ? 'দুরন্ত কালচারাল একাডেমি' : 'Duronto Cultural Academy'}
+            <div className="flex flex-col justify-center">
+              <span className={`font-['Anek_Bangla'] font-bold text-left block text-primary uppercase tracking-widest transition-all org-name w-[114px] pb-0 pt-0 ${
+                language === 'bn' 
+                  ? 'leading-[14px] lg:w-[171px] lg:h-[64px] lg:leading-[20px] lg:text-[22px] h-[33px] text-[15px]' 
+                  : 'lg:w-[165px] lg:text-[22px] text-[14px] leading-tight lg:leading-[22px]'
+              }`}>
+                {language === 'bn' ? 'দুরন্ত কালচারাল একাডেমি' : 'Duranta Cultural Academy'}
               </span>
-              <span className="font-black text-[#041122] uppercase tracking-tighter leading-none transition-all mt-0 org-subtitle lg:text-[12px] text-[8px] sm:text-[11px] md:text-[14px]">
-                {language === 'bn' ? 'শিল্প ও সংস্কৃতি চর্চায় আমরা দুরন্ত' : 'Center for Music & Arts'}
-              </span>
+              {language === 'bn' && (
+                <span className="font-black text-[#041122] uppercase tracking-tighter leading-none transition-all mt-0 org-subtitle lg:text-[12px] text-[8px] sm:text-[11px] md:text-[14px]">
+                  শিল্প ও সংস্কৃতি চর্চায় আমরা দুরন্ত
+                </span>
+              )}
             </div>
           </Link>
 
@@ -178,15 +184,36 @@ export const Navbar: React.FC = () => {
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </Button>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setLanguage(language === 'bn' ? 'en' : 'bn')}
-              className="font-bold flex items-center gap-1.5 border border-solid border-[1px] rounded-[6.35544px] bg-[#ff7d31] text-white hover:bg-[#ff7d31]/90"
-            >
-              <Globe size={18} />
-              {language === 'bn' ? 'EN' : 'বাংলা'}
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setLanguage(language === 'bn' ? 'en' : 'bn')}
+                className="font-bold flex items-center gap-2 border border-solid border-[1px] rounded-[6.35544px] bg-[#ff7d31] text-white hover:bg-[#ff7d31]/90 overflow-hidden"
+              >
+                <motion.div
+                  animate={{ rotate: language === 'bn' ? 360 : 0 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  className="flex items-center justify-center"
+                >
+                  <Globe size={18} />
+                </motion.div>
+                <div className="relative h-5 overflow-hidden flex items-center min-w-[36px] justify-center">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.span
+                      key={language}
+                      initial={{ y: 15, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -15, opacity: 0 }}
+                      transition={{ duration: 0.2, ease: "easeInOut" }}
+                      className="absolute font-bold text-xs"
+                    >
+                      {language === 'bn' ? 'EN' : 'বাংলা'}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+              </Button>
+            </motion.div>
             
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button asChild className="bg-gradient-to-r from-green-400 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-700 rounded-full px-5 py-2 font-bold text-sm shadow-md border-none transition-all">
@@ -197,14 +224,22 @@ export const Navbar: React.FC = () => {
 
           {/* Mobile Menu Trigger */}
           <div className="lg:hidden flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setLanguage(language === 'bn' ? 'en' : 'bn')}
-              className="text-primary hover:bg-secondary/20"
-            >
-              <Globe size={20} />
-            </Button>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setLanguage(language === 'bn' ? 'en' : 'bn')}
+                className="text-primary hover:bg-secondary/20 relative"
+              >
+                <motion.div
+                  animate={{ rotate: language === 'bn' ? 360 : 0 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  className="flex items-center justify-center"
+                >
+                  <Globe size={20} />
+                </motion.div>
+              </Button>
+            </motion.div>
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger className="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-primary hover:bg-secondary/20 transition-colors">
                 <Menu size={24} />
@@ -213,7 +248,7 @@ export const Navbar: React.FC = () => {
                 <div className="flex flex-col h-full">
                   <SheetHeader className="p-8 border-b border-gray-100 dark:border-white/10">
                     <SheetTitle className="text-primary dark:text-white flex flex-col gap-2">
-                      <span className="text-4xl font-black">Duronto</span>
+                      <span className="text-4xl font-black">Duranta</span>
                       <Button
                         variant="ghost"
                         size="sm"

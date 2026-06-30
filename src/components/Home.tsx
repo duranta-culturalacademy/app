@@ -121,15 +121,15 @@ export const Home: React.FC = () => {
           ))}
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 text-center mt-40 md:mt-48 lg:mt-52" style={{ marginLeft: 'clamp(0px, 0.5vw, 6.5px)', marginBottom: '0px' }}>
+        <div className="container mx-auto px-4 relative z-10 text-center mt-40 md:mt-48 lg:mt-52 xl:mt-[175px] xl:!ml-[10px] xl:!mr-[10px]" style={{ marginLeft: 'clamp(0px, 0.5vw, 6.5px)', marginBottom: '0px' }}>
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", bounce: 0.6, duration: 1 }}
-            className="text-5xl sm:text-7xl md:text-9xl font-black text-white mb-6 md:mb-8 leading-tight drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
+            className="text-5xl sm:text-7xl md:text-9xl font-black text-white mb-6 md:mb-8 leading-tight drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] xl:mb-[10px] xl:w-[1200px] xl:h-[157px] xl:max-w-full xl:mx-auto"
           >
-            <span className="inline-block hover:scale-110 transition-transform cursor-default">{t.hero.title.split(' ')[0]}</span>{' '}
-            <span className="text-[#fc6625] inline-block hover:rotate-3 transition-transform cursor-default" style={{ fontSize: 'clamp(2.5rem, 8vw, 128px)' }}>{t.hero.title.split(' ').slice(1).join(' ')}</span>
+            <span className="inline-block hover:scale-110 transition-transform cursor-default xl:text-[110px] xl:w-[200px] xl:h-[135px] xl:leading-[135px]">{t.hero.title.split(' ')[0]}</span>{' '}
+            <span className="text-[#fc6625] inline-block hover:rotate-3 transition-transform cursor-default xl:!text-[110px] xl:w-[900px] xl:max-w-full xl:h-[135px] xl:leading-[135px]" style={{ fontSize: 'clamp(2.5rem, 8vw, 128px)' }}>{t.hero.title.split(' ').slice(1).join(' ')}</span>
           </motion.h1>
           
           <motion.p
@@ -218,7 +218,7 @@ export const Home: React.FC = () => {
               {language === 'bn' ? (
                 <span><strong>দুরন্ত কালচারাল একাডেমি</strong></span>
               ) : (
-                <span><strong>Duronto Cultural Academy</strong></span>
+                <span><strong>Duranta Cultural Academy</strong></span>
               )}
             </h2>
 
@@ -227,7 +227,7 @@ export const Home: React.FC = () => {
                 {language === 'bn' ? (
                   <><strong>মূলমন্ত্র:</strong> শিল্প ও সংস্কৃতি চর্চায় আমরা দুরন্ত</>
                 ) : (
-                  <><strong>Motto:</strong> We are Duronto in practicing arts & culture</>
+                  <><strong>Motto:</strong> We are Duranta in practicing arts & culture</>
                 )}
               </h4>
 
@@ -255,7 +255,7 @@ export const Home: React.FC = () => {
             </p>
           ) : (
             <p className="text-justify">
-              Duronto Cultural Academy is a creative cultural platform for children, adolescents, and youth where their hidden talents are nurtured through acting, music, presentation, recitation, drawing, and various cultural activities. We believe that the complete development of a human being is not possible through institutional education alone; it requires creativity, self-confidence, moral values, and cultural practice. With that goal, Duronto Cultural Academy is working to build a cultured, confident, and humane new generation.
+              Duranta Cultural Academy is a creative cultural platform for children, adolescents, and youth where their hidden talents are nurtured through acting, music, presentation, recitation, drawing, and various cultural activities. We believe that the complete development of a human being is not possible through institutional education alone; it requires creativity, self-confidence, moral values, and cultural practice. With that goal, Duranta Cultural Academy is working to build a cultured, confident, and humane new generation.
             </p>
           )}
         </motion.div>
@@ -286,7 +286,7 @@ export const Home: React.FC = () => {
                 </p>
               ) : (
                 <p>
-                  The vision of Duronto Cultural Academy is to build a cultured, creative, and confident generation through the practice of art and culture. We believe that it is possible to develop the creative potential hidden in every child through proper guidance and training.
+                  The vision of Duranta Cultural Academy is to build a cultured, creative, and confident generation through the practice of art and culture. We believe that it is possible to develop the creative potential hidden in every child through proper guidance and training.
                   <br /><br />
                   We will create a generation that can bring positive changes to society by holding onto their own culture and heritage with creative thoughts, moral values, and self-confidence.
                 </p>
@@ -318,7 +318,7 @@ export const Home: React.FC = () => {
                 </p>
               ) : (
                 <p>
-                  The goal of Duronto Cultural Academy is to create opportunities for children, adolescents, and youth to develop their talents and increase their self-confidence, creativity, and presentation skills through acting, music, and cultural practice.
+                  The goal of Duranta Cultural Academy is to create opportunities for children, adolescents, and youth to develop their talents and increase their self-confidence, creativity, and presentation skills through acting, music, and cultural practice.
                   <br /><br />
                   We prepare students for skilled participation on stage, media, and the cultural arena, alongside introducing them to Bengali culture and heritage. Our main objective is to build future skilled artists, cultural workers, and responsible citizens in a safe and joyful environment.
                 </p>
@@ -380,7 +380,7 @@ export const Home: React.FC = () => {
                 <span>
                   {language === 'bn' 
                     ? 'গত ১০ বছর ধরে “দুরন্ত থিয়েটার”-এর মাধ্যমে মঞ্চ নাটক ও নাট্যচর্চার আয়োজন।' 
-                    : 'Organizing stage plays and theatre practices through "Duronto Theater" for the past 10 years.'}
+                    : 'Organizing stage plays and theatre practices through "Duranta Theater" for the past 10 years.'}
                 </span>
               </li>
               <li className="flex items-start gap-3 text-base md:text-lg text-body">
@@ -597,7 +597,7 @@ export const Home: React.FC = () => {
             <div className="shrink-0 flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-xl border-2 border-primary/20 hover:scale-110 transition-transform duration-300 overflow-hidden">
               <img 
                 src="https://i.postimg.cc/J7X7w1FV/Duranta-Theater-Logo.png" 
-                alt="Duronto Theater Logo" 
+                alt="Duranta Theater Logo" 
                 className="w-full h-full object-contain p-1" 
                 referrerPolicy="no-referrer"
               />
@@ -605,12 +605,12 @@ export const Home: React.FC = () => {
             {/* Content area */}
             <div className="flex-1 space-y-2 text-center sm:text-left">
               <h4 className="text-xl md:text-2xl font-extrabold text-heading">
-                {language === 'bn' ? 'দুরন্ত থিয়েটার' : 'Duronto Theater'}
+                {language === 'bn' ? 'দুরন্ত থিয়েটার' : 'Duranta Theater'}
               </h4>
               <p className="text-base text-body leading-relaxed text-justify">
                 {language === 'bn' 
                   ? 'দুরন্ত কালচারাল একাডেমির নাট্যচর্চার অন্যতম একটি শাখা। এর মাধ্যমে নিয়মিত নাটক, মঞ্চায়ন ও অভিনয় প্রশিক্ষণের আয়োজন করা হয় এবং শিশু-কিশোরদের অভিনয় দক্ষতা, সৃজনশীলতা ও আত্মবিশ্বাস বিকাশে কাজ করা হয়।'
-                  : 'One of the core wings of Duronto Cultural Academy for theatre practices. It conducts regular drama, staging, and acting training, working to develop the acting skills, creativity, and self-confidence of children and adolescents.'}
+                  : 'One of the core wings of Duranta Cultural Academy for theatre practices. It conducts regular drama, staging, and acting training, working to develop the acting skills, creativity, and self-confidence of children and adolescents.'}
               </p>
             </div>
           </motion.div>
@@ -630,12 +630,12 @@ export const Home: React.FC = () => {
             {/* Content area */}
             <div className="flex-1 space-y-2 text-center sm:text-left">
               <h4 className="text-xl md:text-2xl font-extrabold text-heading">
-                {language === 'bn' ? 'দুরন্ত স্টুডিও' : 'Duronto Studio'}
+                {language === 'bn' ? 'দুরন্ত স্টুডিও' : 'Duranta Studio'}
               </h4>
               <p className="text-base text-body leading-relaxed text-justify">
                 {language === 'bn' 
                   ? 'দুরন্ত কালচারাল একাডেমির সৃজনশীল প্রযোজনা ও মিডিয়া কার্যক্রমের একটি গুরুত্বপূর্ণ প্ল্যাটফর্ম। এর মাধ্যমে সংগীত, সাংস্কৃতিক পরিবেশনা, অডিও-ভিজ্যুয়াল কনটেন্ট ও বিভিন্ন সৃজনশীল কার্যক্রম পরিচালনা করা হয়।'
-                  : 'A vital platform for creative production and media activities under Duronto Cultural Academy. It manages music, cultural performances, audio-visual content creation, and various innovative projects.'}
+                  : 'A vital platform for creative production and media activities under Duranta Cultural Academy. It manages music, cultural performances, audio-visual content creation, and various innovative projects.'}
               </p>
             </div>
           </motion.div>
@@ -655,12 +655,12 @@ export const Home: React.FC = () => {
             {/* Content area */}
             <div className="flex-1 space-y-2 text-center sm:text-left">
               <h4 className="text-xl md:text-2xl font-extrabold text-heading">
-                {language === 'bn' ? 'দুরন্ত আর্ট ইন্সটিটিউট' : 'Duronto Art Institute'}
+                {language === 'bn' ? 'দুরন্ত আর্ট ইন্সটিটিউট' : 'Duranta Art Institute'}
               </h4>
               <p className="text-base text-body leading-relaxed text-justify">
                 {language === 'bn' 
                   ? 'চারুকলা ও চিত্রাঙ্কন শিক্ষার জন্য দুরন্ত কালচারাল একাডেমির একটি বিশেষায়িত শাখা। এখানে শিক্ষার্থীদের আঁকা, রং, সৃজনশীল চিন্তা ও বিভিন্ন শিল্পকলার বিষয়ে প্রশিক্ষণ প্রদান করা হয়।'
-                  : 'A specialized wing of Duronto Cultural Academy dedicated to fine arts and painting education. It provides training in drawing, colors, creative thinking, and various forms of fine arts.'}
+                  : 'A specialized wing of Duranta Cultural Academy dedicated to fine arts and painting education. It provides training in drawing, colors, creative thinking, and various forms of fine arts.'}
               </p>
             </div>
           </motion.div>
@@ -680,7 +680,7 @@ export const Home: React.FC = () => {
             {/* Content area */}
             <div className="flex-1 space-y-2 text-center sm:text-left">
               <h4 className="text-xl md:text-2xl font-extrabold text-heading">
-                {language === 'bn' ? 'দুরন্ত আবৃত্তি সংসদ' : 'Duronto Recitation Association'}
+                {language === 'bn' ? 'দুরন্ত আবৃত্তি সংসদ' : 'Duranta Recitation Association'}
               </h4>
               <p className="text-base text-body leading-relaxed text-justify">
                 {language === 'bn' 
@@ -692,7 +692,7 @@ export const Home: React.FC = () => {
 
         </div>
 
-        {/* Why Duronto Cultural Academy? Unified Card */}
+        {/* Why Duranta Cultural Academy? Unified Card */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -706,7 +706,7 @@ export const Home: React.FC = () => {
               {language === 'bn' ? (
                 <strong>কেন দুরন্ত কালচারাল একাডেমি?</strong>
               ) : (
-                <strong>Why Duronto Cultural Academy?</strong>
+                <strong>Why Duranta Cultural Academy?</strong>
               )}
             </h3>
 
@@ -788,7 +788,7 @@ export const Home: React.FC = () => {
               ) : (
                 <>
                   <p>
-                    Duronto Cultural Academy can be a trusted companion in your child's journey towards a creative future.
+                    Duranta Cultural Academy can be a trusted companion in your child's journey towards a creative future.
                   </p>
                   <p>
                     Let us build a confident, creative, and cultured generation through art and culture.

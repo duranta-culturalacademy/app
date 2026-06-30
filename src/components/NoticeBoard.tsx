@@ -26,7 +26,27 @@ export const NoticeBoard: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
-  const filteredNotices = notices.filter(notice => {
+  const combinedNotices: any[] = [];
+  
+  // Prepend the admission notice as Notice No. 1
+  combinedNotices.push({
+    id: 'admission-notice-2026',
+    titleBn: 'ভর্তি বিজ্ঞপ্তি ২০২৬',
+    titleEn: 'Admission Notice 2026',
+    contentBn: `📢 ভর্তি বিজ্ঞপ্তি:
+নতুন ব্যাচে দুরন্ত কালচারাল একাডেমির বিভিন্ন কোর্সের রেজিস্ট্রেশন কার্যক্রম আগামী ০১ জুলাই ২০২৬ থেকে শুরু হয়ে ১৫ জুলাই ২০২৬ পর্যন্ত চলবে। আগ্রহী শিক্ষার্থীদের নির্ধারিত সময়ের মধ্যে রেজিস্ট্রেশন সম্পন্ন করার জন্য অনুরোধ করা যাচ্ছে। বিশেষ সুবিধা হিসেবে, আগামী ১২ জুলাই ২০২৬-এর মধ্যে রেজিস্ট্রেশন সম্পন্ন করলে ভর্তি ফি-তে ৫০% বিশেষ ছাড় প্রদান করা হবে। সীমিত আসনে ভর্তি কার্যক্রম চলবে।`,
+    contentEn: `📢 Admission Notice:
+Registration for various courses in the new batch of Duranta Cultural Academy will run from July 01, 2026 to July 15, 2026. Interested students are requested to complete their registration within the scheduled time. As a special benefit, a 50% discount on the admission fee will be provided if registration is completed by July 12, 2026. Admission is open for limited seats.`,
+    date: '2026-06-30'
+  });
+
+  notices.forEach(notice => {
+    if (notice.id !== 'admission-notice-2026') {
+      combinedNotices.push(notice);
+    }
+  });
+
+  const filteredNotices = combinedNotices.filter(notice => {
     const title = language === 'bn' ? notice.titleBn : notice.titleEn;
     const content = language === 'bn' ? notice.contentBn : notice.contentEn;
     return title?.toLowerCase().includes(search.toLowerCase()) || 

@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
       adminLink: "অ্যাডমিন প্যানেল"
     },
     en: {
-      aboutTitle: "Duronto Academy",
+      aboutTitle: "Duranta Academy",
       sitemapTitle: "Sitemap",
       coursesTitle: "Our Programs",
       contactTitle: "Helpline & Support",
@@ -132,7 +132,7 @@ export const Footer: React.FC = () => {
               <div className="w-[80px] h-[78px] flex items-center justify-center overflow-hidden rounded-2xl bg-white/10 p-2 border border-white/20 shadow-md relative group shrink-0">
                 <img 
                   src="https://i.postimg.cc/BQc1fw58/logo.png" 
-                  alt="Duronto Logo" 
+                  alt="Duranta Logo" 
                   className="w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
