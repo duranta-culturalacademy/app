@@ -91,7 +91,7 @@ export const Courses: React.FC = () => {
                           </span>
                         </div>
                         <div className="pl-4 text-[13px] md:text-[15px] font-black text-emerald-600 dark:text-emerald-500 mt-0.5">
-                          (১২ জুলাই ২০২৬ এর মধ্যে ভর্তি হলে ৫০% ছাড়)
+                          (১৪ জুলাই ২০২৬ এর মধ্যে ভর্তি হলে ৫০% ছাড়)
                         </div>
                       </li>
                       <li className="flex gap-2"><span>*</span> <span className="font-bold">ভর্তি যোগ্যতা: ৩য় শ্রেণি থেকে ৮ম শ্রেণির শিক্ষার্থী হতে হবে</span></li>
