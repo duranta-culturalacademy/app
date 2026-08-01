@@ -12,21 +12,14 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(() => {
-    try {
-      const saved = localStorage.getItem('language');
-      return (saved as Language) || 'en';
-    } catch (e) {
-      console.warn("localStorage is not available:", e);
-      return 'en';
-    }
-  });
+  const [language, setLanguage] = useState<Language>('en');
 
   useEffect(() => {
     try {
-      localStorage.setItem('language', language);
+      localStorage.removeItem('language');
+      sessionStorage.removeItem('language');
     } catch (e) {
-      console.warn("localStorage is not available:", e);
+      // ignore
     }
     document.documentElement.lang = language;
   }, [language]);

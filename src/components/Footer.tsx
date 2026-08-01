@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
     }
   };
 
-  const config = footerConfig[language as 'bn' | 'en'] || footerConfig.bn;
+  const config = footerConfig[language as 'bn' | 'en'] || footerConfig.en;
 
   // Social handles with pristine styled rings
   const socialHandles = [
