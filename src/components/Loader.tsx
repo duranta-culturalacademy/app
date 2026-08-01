@@ -37,19 +37,27 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     });
     setParticles(generated);
 
-    // Typing effect logic
+    // Typing effect logic with a 2-second pause at "DURANTA CULT"
     let currentIndex = 0;
-    let typeInterval: NodeJS.Timeout;
-    const startTypeTimer = setTimeout(() => {
-      typeInterval = setInterval(() => {
-        if (currentIndex < fullText.length) {
-          setTypedText(fullText.slice(0, currentIndex + 1));
-          currentIndex++;
+    let typeTimeout: NodeJS.Timeout;
+
+    const typeNextChar = () => {
+      if (currentIndex < fullText.length) {
+        currentIndex++;
+        setTypedText(fullText.slice(0, currentIndex));
+
+        // When reaching "DURANTA CULT" (12 characters), pause for ~1.9s (2 blinks)
+        if (currentIndex === 12) {
+          typeTimeout = setTimeout(typeNextChar, 1900);
         } else {
-          clearInterval(typeInterval);
+          typeTimeout = setTimeout(typeNextChar, 55);
         }
-      }, 70);
-    }, 400);
+      }
+    };
+
+    const startTypeTimer = setTimeout(() => {
+      typeNextChar();
+    }, 350);
 
     // Timeline for completing the preloader
     const completeTimer = setTimeout(() => {
@@ -65,7 +73,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     return () => {
       document.body.style.overflow = originalStyle;
       clearTimeout(startTypeTimer);
-      if (typeInterval) clearInterval(typeInterval);
+      if (typeTimeout) clearTimeout(typeTimeout);
       clearTimeout(completeTimer);
     };
   }, [onComplete]);

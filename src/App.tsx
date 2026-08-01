@@ -18,6 +18,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles } from 'lucide-react';
 import { ScrollToTop } from './components/ScrollToTop';
 import { BackToTop } from './components/BackToTop';
+import { ScrollProgressVisualizer } from './components/ScrollProgressVisualizer';
 import { Loader } from './components/Loader';
 import loaderConfig from './loader.config.json';
 
@@ -33,6 +34,9 @@ function AppContent() {
           <Loader onComplete={() => setLoading(false)} />
         )}
       </AnimatePresence>
+
+      {/* Fixed Scroll Progress Visualizer pinned to top of viewport */}
+      <ScrollProgressVisualizer />
 
       <motion.div
         animate={{
