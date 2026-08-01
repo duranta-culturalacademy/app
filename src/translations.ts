@@ -98,7 +98,7 @@ export const translations = {
     nav: {
       home: "Home",
       about: "About",
-      courses: "Courses",
+      courses: "Programs",
       admission: "Admission",
       gallery: "Gallery",
       notices: "Notices",
@@ -121,22 +121,22 @@ export const translations = {
       }
     },
     about: {
-      title: "About Us",
+      title: "About Academy",
       mission: "Our Mission",
       missionDesc: "To awaken a healthy and beautiful cultural consciousness among the new generation.",
       vision: "Our Vision",
       visionDesc: "To build a better society through art and culture."
     },
     courses: {
-      title: "Our Courses",
+      title: "Programs",
       music: {
-        title: "Music Course",
+        title: "Music",
         desc: "Basic and advanced education in vocal training, harmonium, and tabla.",
         duration: "6 Months / 1 Year",
         fee: "600 BDT (Monthly)"
       },
       acting: {
-        title: "Acting Course",
+        title: "Acting",
         desc: "Special training on stage drama, recitation, and various aspects of acting.",
         duration: "6 Months",
         fee: "700 BDT (Monthly)"

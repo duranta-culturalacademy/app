@@ -82,7 +82,7 @@ export const Courses: React.FC = () => {
                   <div className="w-full mt-8 p-6 md:p-8 bg-white/50 rounded-[2rem] border-x-4 border-b-4 border-t-0 border-accent text-primary font-black space-y-4">
                     <h4 className={`text-[24px] font-black mb-4 text-center ${index === 0 ? 'text-[#000307]' : 'text-[#000e1c]'}`}>ভর্তি সংক্রান্ত তথ্য</h4>
                     <ul className="space-y-3 text-base md:text-lg font-bold">
-                      <li className="flex gap-2"><span>*</span> <span className="text-left font-bold">সময়সীমা: ০১ জুলাই’২৬ - ১৬ জুলাই’২৬</span></li>
+                      <li className="flex gap-2"><span>*</span> <span className="text-left font-bold">সময়সীমা: ০১ আগষ্ট’২৬ - ১৩ আগষ্ট’২৬</span></li>
                       <li className="flex flex-col">
                         <div className="flex gap-2">
                           <span>*</span>
@@ -91,7 +91,7 @@ export const Courses: React.FC = () => {
                           </span>
                         </div>
                         <div className="pl-4 text-[13px] md:text-[15px] font-black text-emerald-600 dark:text-emerald-500 mt-0.5">
-                          (১৪ জুলাই ২০২৬ এর মধ্যে ভর্তি হলে ৫০% ছাড়)
+                          (১০ আগষ্ট ২০২৬ এর মধ্যে রেজিষ্ট্রেশন সম্পন্ন করলে ৫০% ছাড়)
                         </div>
                       </li>
                       <li className="flex gap-2"><span>*</span> <span className="font-bold">ভর্তি যোগ্যতা: ৩য় শ্রেণি থেকে ৮ম শ্রেণির শিক্ষার্থী হতে হবে</span></li>
@@ -116,7 +116,7 @@ export const Courses: React.FC = () => {
                         <div className="p-6 md:p-8 bg-white/50 rounded-[2rem] border-4 border-accent text-primary font-black space-y-4">
                           <h3 className="text-2xl md:text-3xl font-black mb-4 text-[#070000]">কোর্স সংক্রান্ত তথ্য</h3>
                           <ul className="space-y-3 text-base md:text-lg font-bold">
-                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শুরু: ১৭ জুলাই ২০ ২৬</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শুরু: ১৪ আগষ্ট ২০২৬ <span className="text-[13px] md:text-[15px] font-semibold ml-0.5">(অরিয়েন্টেশন)</span></span></li>
                             <li className="flex gap-2"><span>*</span> <span className="font-bold">ক্লাসের সময়:  শুক্রবার সকাল ৯:৩০ মিনিট</span></li>
                             <li className="flex gap-2"><span>*</span> <span className="font-bold">ক্লাসের স্থান: School of the Nation (SON), Banasree</span></li>
                             <li className="flex gap-2"><span>*</span> <span className="font-bold">মাসিক ফি: ৫০০/-</span></li>
@@ -140,7 +140,7 @@ export const Courses: React.FC = () => {
                         <div className="p-6 md:p-8 bg-white/50 rounded-[2rem] border-4 border-accent text-primary font-black space-y-4">
                           <h3 className="text-2xl md:text-3xl font-black mb-4 text-[#000a19]">কোর্স সংক্রান্ত তথ্য</h3>
                           <ul className="space-y-3 text-base md:text-lg font-bold">
-                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শুরু: ১৮ জুলাই ২০২৬</span></li>
+                            <li className="flex gap-2"><span>*</span> <span className="font-bold">কোর্স শুরু: ১৫ আগষ্ট ২০২৬ <span className="text-[13px] md:text-[15px] font-semibold ml-0.5">(অরিয়েন্টেশন)</span></span></li>
                             <li className="flex gap-2"><span>*</span> <span className="font-bold">ক্লাসের সময়: শনিবার সকাল ৯:৩০ মিনিট</span></li>
                             <li className="flex gap-2"><span>*</span> <span className="font-bold">ক্লাসের স্থান: School of the Nation (SON), Banasree</span></li>
                             <li className="flex gap-2"><span>*</span> <span className="font-bold">মাসিক ফি: ৫০০/-</span></li>

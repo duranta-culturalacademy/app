@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Camera, Sparkles, X } from 'lucide-react';
 
 export const Gallery: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedImg, setSelectedImg] = React.useState<any | null>(null);
 
   const images = [
@@ -98,7 +98,7 @@ export const Gallery: React.FC = () => {
         className="text-center mb-16"
       >
         <h1 className="text-6xl md:text-9xl font-black mb-8 text-heading">
-          {t.nav.gallery}
+          {language === 'bn' ? 'গ্যালারি' : 'Memories Gallery'}
         </h1>
       </motion.div>
       

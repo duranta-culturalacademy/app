@@ -121,15 +121,15 @@ export const Home: React.FC = () => {
           ))}
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 text-center mt-40 md:mt-48 lg:mt-52 xl:mt-[175px] xl:!ml-[10px] xl:!mr-[10px]" style={{ marginLeft: 'clamp(0px, 0.5vw, 6.5px)', marginBottom: '0px' }}>
+        <div className="container mx-auto px-2 sm:px-4 relative z-10 text-center mt-40 md:mt-48 lg:mt-52 xl:mt-[175px] xl:!ml-[10px] xl:!mr-[10px]" style={{ marginLeft: 'clamp(0px, 0.5vw, 6.5px)', marginBottom: '0px' }}>
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", bounce: 0.6, duration: 1 }}
-            className="text-5xl sm:text-7xl md:text-9xl font-black text-white mb-6 md:mb-8 leading-tight drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] xl:mb-[10px] xl:w-[1200px] xl:h-[157px] xl:max-w-full xl:mx-auto"
+            className="whitespace-normal sm:whitespace-nowrap text-[clamp(2.65rem,9.5vw,7.8rem)] font-black tracking-tight text-white mb-6 md:mb-8 leading-tight drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] max-w-full mx-auto"
           >
-            <span className="inline-block hover:scale-110 transition-transform cursor-default xl:text-[110px] xl:w-[200px] xl:h-[135px] xl:leading-[135px]">{t.hero.title.split(' ')[0]}</span>{' '}
-            <span className="text-[#fc6625] inline-block hover:rotate-3 transition-transform cursor-default xl:!text-[110px] xl:w-[900px] xl:max-w-full xl:h-[135px] xl:leading-[135px]" style={{ fontSize: 'clamp(2.5rem, 8vw, 128px)' }}>{t.hero.title.split(' ').slice(1).join(' ')}</span>
+            <span className="block sm:inline-block hover:scale-105 transition-transform cursor-default">{t.hero.title.split(' ')[0]}</span>{' '}
+            <span className="text-[#fc6625] block sm:inline-block hover:scale-105 transition-transform cursor-default">{t.hero.title.split(' ').slice(1).join(' ')}</span>
           </motion.h1>
           
           <motion.p
@@ -183,7 +183,7 @@ export const Home: React.FC = () => {
       <section id="about" className="scroll-mt-24 lg:scroll-mt-36 pt-[70px] pb-40 container mx-auto px-4">
         <div className="text-center mb-24">
           <h2 className="text-6xl md:text-8xl font-black mb-8 text-heading">
-            {language === 'bn' ? 'আমাদের সম্পর্কে' : 'About Us'}
+            {language === 'bn' ? 'আমাদের সম্পর্কে' : 'About Academy'}
           </h2>
           <div className="bg-gradient-to-r from-primary via-sky to-secondary mx-auto rounded-full shadow-lg" style={{ width: '100%', maxWidth: '500px', height: '10px' }}></div>
         </div>
@@ -340,7 +340,7 @@ export const Home: React.FC = () => {
               {language === 'bn' ? (
                 <strong>আমাদের প্রধান কার্যক্রমসমূহ</strong>
               ) : (
-                <strong>Our Major Activities</strong>
+                <strong>Major Activities</strong>
               )}
             </h3>
           </div>
@@ -576,7 +576,7 @@ export const Home: React.FC = () => {
               {language === 'bn' ? (
                 <strong>আমাদের প্লাটফর্মসমূহ</strong>
               ) : (
-                <strong>Our Platforms</strong>
+                <strong>Platforms</strong>
               )}
             </h3>
           </div>

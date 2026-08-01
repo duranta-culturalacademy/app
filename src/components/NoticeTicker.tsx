@@ -21,9 +21,9 @@ export const NoticeTicker: React.FC = () => {
 
   // Standard elegant general notices if none are present in Firestore
   const defaultNotices = language === 'bn' ? [
-    'দুরন্ত কালচারাল একাডেমির নতুন ব্যাচের কোর্সসমূহের রেজিস্ট্রেশন আগামী ০১ জুলাই ২০২৬ থেকে ১৫ জুলাই ২০২৬ পর্যন্ত চলবে। ১২ জুলাইয়ের মধ্যে রেজিস্ট্রেশন করলে ভর্তি ফি-তে ৫০% ছাড়। বিস্তারিত জানতে ক্লিক করুন।'
+    'দুরন্ত কালচারাল একাডেমির নতুন ব্যাচের কোর্সসমূহের রেজিস্ট্রেশন আগামী ০১ আগষ্ট ২০২৬ থেকে ১৩ আগষ্ট ২০২৬ পর্যন্ত চলবে। ১০ আগষ্টের মধ্যে রেজিস্ট্রেশন করলে ভর্তি ফি-তে ৫০% ছাড়। বিস্তারিত জানতে ক্লিক করুন।'
   ] : [
-    'Registration for the new batch of courses at Duranta Cultural Academy will run from July 01, 2026 to July 15, 2026. Register by July 12 to get a 50% discount on the admission fee. Click here for details.'
+    'Registration for the new batch of courses at Duranta Cultural Academy will run from August 01, 2026 to August 13, 2026. Register by August 10 to get a 50% discount on the admission fee. Click here for details.'
   ];
 
   const displayedNotices = notices.length > 0 
@@ -37,7 +37,7 @@ export const NoticeTicker: React.FC = () => {
         <span className="text-white">
           {parts[0]}
           <a 
-            href="https://duranta-culturalacademy.vercel.app/admission" 
+            href="https://www.facebook.com/duranta.culturalacademy.2012" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-blue-400 hover:text-blue-300 hover:underline font-black mx-1 inline-block"
@@ -55,7 +55,7 @@ export const NoticeTicker: React.FC = () => {
         <span className="text-white">
           {parts[0]}
           <a 
-            href="https://duranta-culturalacademy.vercel.app/admission" 
+            href="https://www.facebook.com/duranta.culturalacademy.2012" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-blue-400 hover:text-blue-300 hover:underline font-black mx-1 inline-block"

@@ -15,10 +15,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [language, setLanguage] = useState<Language>(() => {
     try {
       const saved = localStorage.getItem('language');
-      return (saved as Language) || 'bn';
+      return (saved as Language) || 'en';
     } catch (e) {
       console.warn("localStorage is not available:", e);
-      return 'bn';
+      return 'en';
     }
   });
 

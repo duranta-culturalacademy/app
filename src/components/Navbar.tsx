@@ -110,7 +110,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed top-6 z-50 transition-all duration-500 rounded-full bg-white/30 backdrop-blur-md border border-white/20 pl-[4px] pr-[8px] pb-[5px] pt-[5px] max-w-[calc(100%-2rem)] md:max-w-[calc(100%-6rem)] lg:max-w-full lg:left-1/2 lg:-translate-x-1/2 lg:right-auto lg:w-[1200px] lg:h-[93px] h-[76px] left-4 right-4 md:left-12 md:right-12 ${scrolled ? 'shadow-2xl' : 'shadow-lg'}`}>
+    <nav className={`fixed top-6 z-50 transition-all duration-500 rounded-full bg-sky-100/85 dark:bg-slate-900/85 backdrop-blur-md border border-sky-200/70 dark:border-white/20 pl-[4px] pr-[8px] pb-[5px] pt-[5px] max-w-[calc(100%-2rem)] md:max-w-[calc(100%-6rem)] lg:max-w-full lg:left-1/2 lg:-translate-x-1/2 lg:right-auto lg:w-[1200px] lg:h-[93px] h-[76px] left-4 right-4 md:left-12 md:right-12 ${scrolled ? 'shadow-2xl' : 'shadow-lg'}`}>
       
       <div className="container mx-auto px-2">
         <div className="flex items-center justify-between transition-all duration-500 relative mt-[6px] lg:mt-0 h-16 lg:h-20">
@@ -129,18 +129,9 @@ export const Navbar: React.FC = () => {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <span className={`font-['Anek_Bangla'] font-bold text-left block text-primary uppercase tracking-widest transition-all org-name w-[114px] pb-0 pt-0 ${
-                language === 'bn' 
-                  ? 'leading-[14px] lg:w-[171px] lg:h-[64px] lg:leading-[20px] lg:text-[22px] h-[33px] text-[15px]' 
-                  : 'lg:w-[165px] lg:text-[22px] text-[14px] leading-tight lg:leading-[22px]'
-              }`}>
-                {language === 'bn' ? 'দুরন্ত কালচারাল একাডেমি' : 'Duranta Cultural Academy'}
+              <span className="font-black text-left block text-primary uppercase tracking-wider transition-all org-name w-[125px] sm:w-[150px] lg:w-[170px] text-[13px] sm:text-[15px] lg:text-[20px] leading-tight lg:leading-[22px]">
+                DURANTA CULTURAL ACADEMY
               </span>
-              {language === 'bn' && (
-                <span className="font-black text-[#041122] uppercase tracking-tighter leading-none transition-all mt-0 org-subtitle lg:text-[12px] text-[8px] sm:text-[11px] md:text-[14px]">
-                  শিল্প ও সংস্কৃতি চর্চায় আমরা দুরন্ত
-                </span>
-              )}
             </div>
           </Link>
 
@@ -156,15 +147,10 @@ export const Navbar: React.FC = () => {
                   <Link
                     to={link.path}
                     onClick={(e) => handleNavClick(link, e)}
-                    style={isActive ? { backgroundColor: '#fc7441' } : { color: '#ffffff' }}
-                    className={`font-bold uppercase tracking-wide transition-all px-3 py-2 rounded-full whitespace-nowrap text-xs xl:text-sm ${
-                      index === 0 
-                        ? 'border-0' 
-                        : ''
-                    } ${
+                    className={`font-bold uppercase tracking-wide transition-all px-3.5 py-2 rounded-full whitespace-nowrap text-xs xl:text-sm ${
                       isActive 
-                        ? 'text-white shadow-sm' 
-                        : 'hover:bg-orange-100/50 hover:text-orange-600'
+                        ? 'bg-[#fc6625] text-white shadow-md' 
+                        : 'bg-sky-200/50 text-[#fc6625] hover:bg-sky-200/90 hover:text-[#e05316] dark:bg-white/10 dark:text-white dark:hover:bg-white/20'
                     }`}
                   >
                     {link.name}
@@ -272,11 +258,10 @@ export const Navbar: React.FC = () => {
                             onClick={(e) => {
                               handleNavClick(link, e);
                             }}
-                            style={isActive ? { backgroundColor: '#fc7441' } : { color: '#ffffff' }}
-                            className={`text-xl font-black py-4 px-6 rounded-full transition-all duration-300 flex items-center gap-3 ${
+                            className={`text-lg font-black py-3.5 px-6 rounded-full transition-all duration-300 flex items-center gap-3 ${
                               isActive 
-                                ? 'text-white shadow-md' 
-                                : 'hover:bg-orange-100 hover:text-orange-600'
+                                ? 'bg-[#fc6625] text-white shadow-md' 
+                                : 'bg-sky-100/80 text-[#fc6625] hover:bg-sky-200/90 hover:text-[#e05316] dark:bg-white/10 dark:text-white dark:hover:bg-white/20'
                             }`}
                           >
                             {link.name}

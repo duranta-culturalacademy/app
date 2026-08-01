@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import loaderConfig from '../loader.config.json';
 
 interface Particle {
@@ -17,7 +17,8 @@ interface LoaderProps {
 
 export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   const [particles, setParticles] = useState<Particle[]>([]);
-  const [textVisible, setTextVisible] = useState(false);
+  const fullText = "DURANTA CULTURAL ACADEMY";
+  const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
     // Generate particles only on the client-side to prevent hydration mismatch
@@ -36,10 +37,19 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     });
     setParticles(generated);
 
-    // Timeline for showing text after logo animates
-    const textTimer = setTimeout(() => {
-      setTextVisible(true);
-    }, (loaderConfig.fadeInDuration + loaderConfig.revealDuration) * 1000);
+    // Typing effect logic
+    let currentIndex = 0;
+    let typeInterval: NodeJS.Timeout;
+    const startTypeTimer = setTimeout(() => {
+      typeInterval = setInterval(() => {
+        if (currentIndex < fullText.length) {
+          setTypedText(fullText.slice(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          clearInterval(typeInterval);
+        }
+      }, 70);
+    }, 400);
 
     // Timeline for completing the preloader
     const completeTimer = setTimeout(() => {
@@ -54,7 +64,8 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
 
     return () => {
       document.body.style.overflow = originalStyle;
-      clearTimeout(textTimer);
+      clearTimeout(startTypeTimer);
+      if (typeInterval) clearInterval(typeInterval);
       clearTimeout(completeTimer);
     };
   }, [onComplete]);
@@ -151,58 +162,25 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
           </motion.div>
         </div>
 
-        {/* Cinematic Title & Subtitle Reveal */}
-        <div className="h-28 flex flex-col justify-start relative z-10">
-          <AnimatePresence>
-            {textVisible && (
-              <div className="space-y-3">
-                {/* Title */}
-                <div className="overflow-hidden">
-                  <motion.h2
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, ease: [0.215, 0.610, 0.355, 1.0] }}
-                    className="text-2xl md:text-3.5xl font-extrabold tracking-wide text-white font-sans drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
-                  >
-                    {loaderConfig.titleText}
-                  </motion.h2>
-                </div>
-
-                {/* Subtitle */}
-                <div className="overflow-hidden">
-                  <motion.p
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.15, ease: [0.215, 0.610, 0.355, 1.0] }}
-                    className="text-xs md:text-sm font-semibold tracking-widest text-secondary uppercase opacity-90 font-sans"
-                  >
-                    {loaderConfig.subtitleText}
-                  </motion.p>
-                </div>
-
-                {/* Aesthetic accent line */}
-                <motion.div
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={{ scaleX: 1, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-                  className="w-16 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent mx-auto mt-2"
-                />
-              </div>
-            )}
-          </AnimatePresence>
+        {/* Typing Loading Text */}
+        <div className="h-16 flex items-center justify-center relative z-10 px-2 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-center font-extrabold whitespace-nowrap text-[clamp(0.85rem,4.6vw,1.875rem)] tracking-wider sm:tracking-widest text-white font-sans drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] max-w-full"
+          >
+            <span className="bg-gradient-to-r from-white via-slate-100 to-[#fc6625] bg-clip-text text-transparent">
+              {typedText}
+            </span>
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+              className="inline-block w-1.5 sm:w-2 md:w-2.5 h-4 sm:h-5 md:h-7 bg-[#fc6625] ml-1 sm:ml-1.5 rounded-sm shadow-[0_0_10px_#fc6625] flex-shrink-0"
+            />
+          </motion.div>
         </div>
 
       </div>
-
-      {/* Subtle Bottom Technical/Creative Academy Branding */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-6 text-[10px] uppercase tracking-[0.25em] text-white/60 font-mono"
-      >
-        Art &bull; Culture &bull; Theatre
-      </motion.div>
     </motion.div>
   );
 };

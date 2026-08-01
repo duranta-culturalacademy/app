@@ -34,9 +34,9 @@ export const NoticeBoard: React.FC = () => {
     titleBn: 'ভর্তি বিজ্ঞপ্তি ২০২৬',
     titleEn: 'Admission Notice 2026',
     contentBn: `📢 ভর্তি বিজ্ঞপ্তি:
-নতুন ব্যাচে দুরন্ত কালচারাল একাডেমির বিভিন্ন কোর্সের রেজিস্ট্রেশন কার্যক্রম আগামী ০১ জুলাই ২০২৬ থেকে শুরু হয়ে ১৫ জুলাই ২০২৬ পর্যন্ত চলবে। আগ্রহী শিক্ষার্থীদের নির্ধারিত সময়ের মধ্যে রেজিস্ট্রেশন সম্পন্ন করার জন্য অনুরোধ করা যাচ্ছে। বিশেষ সুবিধা হিসেবে, আগামী ১২ জুলাই ২০২৬-এর মধ্যে রেজিস্ট্রেশন সম্পন্ন করলে ভর্তি ফি-তে ৫০% বিশেষ ছাড় প্রদান করা হবে। সীমিত আসনে ভর্তি কার্যক্রম চলবে।`,
+নতুন ব্যাচে দুরন্ত কালচারাল একাডেমির বিভিন্ন কোর্সের রেজিস্ট্রেশন কার্যক্রম আগামী ০১ আগষ্ট ২০২৬ থেকে শুরু হয়ে ১৩ আগষ্ট ২০২৬ পর্যন্ত চলবে। আগ্রহী শিক্ষার্থীদের নির্ধারিত সময়ের মধ্যে রেজিস্ট্রেশন সম্পন্ন করার জন্য অনুরোধ করা যাচ্ছে। বিশেষ সুবিধা হিসেবে, আগামী ১০ আগষ্ট ২০২৬-এর মধ্যে রেজিস্ট্রেশন সম্পন্ন করলে ভর্তি ফি-তে ৫০% বিশেষ ছাড় প্রদান করা হবে। সীমিত আসনে ভর্তি কার্যক্রম চলবে।`,
     contentEn: `📢 Admission Notice:
-Registration for various courses in the new batch of Duranta Cultural Academy will run from July 01, 2026 to July 15, 2026. Interested students are requested to complete their registration within the scheduled time. As a special benefit, a 50% discount on the admission fee will be provided if registration is completed by July 12, 2026. Admission is open for limited seats.`,
+Registration for various courses in the new batch of Duranta Cultural Academy will run from August 01, 2026 to August 13, 2026. Interested students are requested to complete their registration within the scheduled time. As a special benefit, a 50% discount on the admission fee will be provided if registration is completed by August 10, 2026. Admission is open for limited seats.`,
     date: '2026-06-30'
   });
 
