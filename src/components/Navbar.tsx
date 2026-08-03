@@ -129,7 +129,7 @@ export const Navbar: React.FC = () => {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <span className="font-black text-left block text-primary uppercase tracking-wider transition-all org-name w-[125px] sm:w-[150px] lg:w-[170px] text-[13px] sm:text-[15px] lg:text-[20px] leading-tight lg:leading-[22px]">
+              <span className="font-black text-left block text-white uppercase tracking-wider transition-all org-name w-[125px] sm:w-[150px] lg:w-[170px] text-[13px] sm:text-[15px] lg:text-[20px] leading-tight lg:leading-[22px]" style={{ color: '#ffffff' }}>
                 DURANTA CULTURAL ACADEMY
               </span>
             </div>

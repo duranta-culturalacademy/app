@@ -48,7 +48,7 @@ export const translations = {
       }
     },
     admission: {
-      title: "অনলাইন ভর্তি ফরম",
+      title: "অনলাইন রেজিষ্ট্রেশন ফরম",
       name: "নাম",
       phone: "ফোন নম্বর",
       email: "ইমেইল (ঐচ্ছিক)",
@@ -143,7 +143,7 @@ export const translations = {
       }
     },
     admission: {
-      title: "Online Admission Form",
+      title: "Online Registration Form",
       name: "Name",
       phone: "Phone Number",
       email: "Email (Optional)",

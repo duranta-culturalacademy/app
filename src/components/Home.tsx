@@ -182,10 +182,9 @@ export const Home: React.FC = () => {
       {/* About Section */}
       <section id="about" className="scroll-mt-24 lg:scroll-mt-36 pt-[70px] pb-40 container mx-auto px-4">
         <div className="text-center mb-24">
-          <h2 className="text-6xl md:text-8xl font-black mb-8 text-heading">
+          <h2 className="text-6xl md:text-8xl font-black text-heading">
             {language === 'bn' ? 'আমাদের সম্পর্কে' : 'About Academy'}
           </h2>
-          <div className="bg-gradient-to-r from-primary via-sky to-secondary mx-auto rounded-full shadow-lg" style={{ width: '100%', maxWidth: '500px', height: '10px' }}></div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-stretch max-w-5xl mx-auto">
